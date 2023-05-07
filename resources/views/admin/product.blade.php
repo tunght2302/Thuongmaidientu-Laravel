@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        @include('admin.css')
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+        @include('admin.sidebar')
+      <!-- partial -->
+        @include('admin.header')
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 style="color: red;text-align: center;font-size: 30px;font:bold">ADD PRODUCT</h4>
+                        <form class="forms-sample" action="{{url('/add_product')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                          <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input type="text" class="form-control bg-light text-dark" name="title"  placeholder="Title">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail3">Description</label>
+                            <input type="text" class="form-control bg-light text-dark" name="description"  placeholder="description">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword4">Quantity</label>
+                            <input type="number" min="0" name="quantity" class="form-control bg-light text-dark"  placeholder="Quantity">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword4">Price</label>
+                            <input type="number" name="price"  class="form-control bg-light text-dark"  placeholder="Quantity">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleSelectGender">Category</label>
+                            <select class="form-control bg-light text-dark" name="category" id="exampleSelectGender">
+                                @foreach($category as $category)
+                                <option value="{{$category->category_name}}">
+                                    {{$category->category_name}}
+                                </option>
+                                @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" name="image" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputCity1">Discount_price</label>
+                            <input type="text" name="dis_price" class="form-control bg-light text-dark"  placeholder="Discount_price">
+                          </div>
+                          
+                          <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                          <button type="submit" class="btn btn-danger mr-2">List Product</button>
+                          <button class="btn btn-dark">Cancel</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    <!-- container-scroller -->
+        @include('admin.js')
+  </body>
+</html>
