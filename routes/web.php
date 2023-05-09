@@ -31,6 +31,8 @@ Route::get('/redirect',[HomeController::class,'redirect']);
 // Categories
 Route::get('/view_category',[AdminController::class,'view_category']);
 Route::post('/add_category',[AdminController::class,'add_category']);
+Route::get('/update_category_view/{id}',[AdminController::class,'update_category_view']);
+Route::post('/update_category/{id}',[AdminController::class,'update_category']);
 Route::get('/delete_category/{id}',[AdminController::class,'delete_category']);
 
 // Products

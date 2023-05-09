@@ -45,7 +45,7 @@
                     </div>
                 </div>
             @endforeach
-            <span style="padding-top:70px;margin-left: 500px">
+            <span style="padding-top:70px;margin-left: 400px">
                {!!$product->withQueryString()->links('pagination::bootstrap-5')!!}
             </span>
         </div>

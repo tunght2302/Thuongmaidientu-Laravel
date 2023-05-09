@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 style="color: red;text-align: center;font-size: 30px;font:bold">UPDATE PRODUCT</h4>
-                            <form class="forms-sample" action="{{ url('/update_product',$product->id) }}" method="POST"
+                            <form class="forms-sample" action="{{ url('/update_product',$product->id)}}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">

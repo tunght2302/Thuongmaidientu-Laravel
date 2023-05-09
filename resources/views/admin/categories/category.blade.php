@@ -51,6 +51,7 @@
                                         <tr>
                                             <th class="text-danger"> ID </th>
                                             <th class="text-danger"> Name Category </th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,11 +59,15 @@
                                             <tr>
                                                 <td>{{ $data->id }}</td>
                                                 <td>{{ $data->category_name }}</td>
+                                               
                                                 <td>
+                                                    <a class="btn btn-warning"href="{{ url('/update_category_view', $data->id) }}">
+                                                        Edit
+                                                    </a>
                                                     <a onclick="return confirm('Are you sure to delete')"
                                                         href="{{ url('/delete_category', $data->id) }}">
                                                         <button type="submit"
-                                                            class="btn btn-success btn-rounded btn-fw">Delete</button>
+                                                            class="btn btn-danger">Delete</button>
                                                     </a>
                                                 </td>
                                             </tr>
