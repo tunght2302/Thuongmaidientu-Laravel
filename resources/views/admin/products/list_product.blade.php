@@ -13,6 +13,12 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
+            @if(session()->has('message'))
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        {{ session()->get('message') }}
+                    </div>
+            @endif
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -49,10 +55,14 @@
                                             <td> {{ $product->quantity }} </td>
                                             <td> {{ $product->discount_price }} </td>
                                             <td>
-                                                <button class="btn btn-info">Edit</button>
+                                                <a href="{{url('/update_product_view',$product->id)}}">
+                                                    <button class="btn btn-info">Edit</button>
+                                                </a>
                                             </td>
                                             <td>
-                                                <button class="btn btn-warning">Delete</button>
+                                                <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_product',$product->id)}}"> 
+                                                    <button class="btn btn-warning">Delete</button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
