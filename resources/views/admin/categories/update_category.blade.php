@@ -35,7 +35,7 @@
                                         value="{{ $category->category_name }}">
                                 </div>
                                 <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                                <a class="btn btn-danger mr-2" href="{{ url('/view_category') }}">List Product</a>
+                                <a class="btn btn-primary mr-2" href="{{ url('/view_category') }}">List Category</a>
                                 <button class="btn btn-dark">Cancel</button>
                             </form>
                         </div>
