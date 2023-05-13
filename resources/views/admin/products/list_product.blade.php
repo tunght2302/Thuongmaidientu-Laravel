@@ -28,7 +28,6 @@
                             <table class="table table-dark">
                                 <thead class="bg-light">
                                     <tr>
-                                        <th class="text-dark"> ID </th>
                                         <th class="text-dark"> Title </th>
                                         <th class="text-dark"> Description </th>
                                         <th class="text-dark"> Category </th>
@@ -43,7 +42,6 @@
                                 <tbody>
                                     @foreach ($products as $product)
                                         <tr>
-                                            <td> {{ $product->id }} </td>
                                             <td> {{ $product->title }} </td>
                                             <td> {{ $product->description }} </td>
                                             <td> {{ $product->category }} </td>
@@ -58,8 +56,6 @@
                                                 <a href="{{url('/update_product_view',$product->id)}}">
                                                     <button class="btn btn-info">Edit</button>
                                                 </a>
-                                            </td>
-                                            <td>
                                                 <a onclick="return confirm('Are you sure to delete')" href="{{url('/delete_product',$product->id)}}"> 
                                                     <button class="btn btn-warning">Delete</button>
                                                 </a>

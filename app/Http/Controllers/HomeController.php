@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Categories;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,20 @@ class HomeController extends Controller
     {
         $product = Products::paginate(8);
         return view('client.index', compact('product'));
+    }
+    public function shop()
+    {
+        $categories = Categories::all();
+        $product = Products::paginate(9);
+        return view('client.shop', compact('categories', 'product'));
+    }
+    
+    public function product_by_category($category_name)
+    {
+        $categories = Categories::all();
+        $category = Categories::where('category_name',$category_name)->firstOrFail();
+        $products = Products::where('category','=', $category->category_name)->get();
+        return view('client.product_by_category', compact('categories','category', 'products'));
     }
 
     public function redirect()

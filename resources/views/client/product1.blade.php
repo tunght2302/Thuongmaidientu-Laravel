@@ -45,9 +45,9 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- <span style="">
-                        {!!$product->withQueryString()->links('pagination::bootstrap-5')!!}
-                    </span> --}}
+                    <div style="display: flex;justify-content: center;width: 100%;">
+                        {{ $product->links() }}
+                    </div>
                 </div>
             </div>
         </div>
