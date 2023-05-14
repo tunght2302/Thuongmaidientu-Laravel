@@ -17,7 +17,7 @@
                 <div class="full-height">
                     <div class="content-slide">
                         <p class="crimtext caption-small">The Fall Report</p>
-                        <h2 class="caption-title-2">the fall 2016</h2>
+                        <h2 class="caption-title-2">the summer 2023</h2>
 
                     </div>
                 </div>

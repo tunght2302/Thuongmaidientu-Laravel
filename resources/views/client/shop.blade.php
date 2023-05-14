@@ -18,7 +18,7 @@
                 <h2 class="page-title">SHOP</h2>
                 <div class="breadcrumbs">
                     <a href="#">Home</a>
-                    <a href="#">Shop</a>
+                    <span>Shop</span>
                 </div>
             </div>
         </div>
@@ -90,14 +90,9 @@
                         @endforeach
                     </ul>
                     <nav class="pagination">
-                        <ul>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
+                        <div style="display: flex;justify-content: center;width: 100%;">
+                            {{ $product->links() }}
+                        </div>
                     </nav>
                     <!-- ./ List Products -->
                 </div>
@@ -107,11 +102,13 @@
                     <div class="widget widget_product_categories">
                         <h2 class="widget-title">By Categories</h2>
                         @foreach($categories as $category)
+                        <div style="margin-left: 20px">
                             <a href="{{url('product_by_category',$category->category_name)}}">
                                 <ul class="product-categories">
                                     <li>{{$category->category_name}}</li>
                                 </ul>
                             </a>
+                        </div>
                         @endforeach
                     </div>
                     <!-- ./Product category -->

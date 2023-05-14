@@ -17,8 +17,12 @@ use App\Http\Controllers\AdminController;
 //Home Page
 Route::get('/',[HomeController::class,'index']);
 Route::get('/shop',[HomeController::class,'shop']);
-
-
+Route::get('/blog', function () {
+    return view('client.blog');
+});
+Route::get('/checkout', function () {
+    return view('client.checkout');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

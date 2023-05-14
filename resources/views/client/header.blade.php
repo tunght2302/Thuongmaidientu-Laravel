@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-10 col-md-10 col-lg-7 main-menu-wapper">
                 <a href="#" class="mobile-navigation"><i class="fa fa-bars"></i></a>
-                <nav id="main-menu" class="main-menu">
+                <nav id="main-menu" class="main-menu" style="margin-left: 100px">
                     <ul class="navigation">
                         <li>
                             <a href="{{url('/')}}">Home</a>
@@ -44,7 +44,7 @@
                        
                         <li><a href="{{url('/shop')}}">Shop</a></li>
                         <li>
-                            <a href="#">PORTFOLIO</a>
+                            <a href="/checkout">Check out</a>
                             <ul class="sub-menu">
                                 <li><a href="portfolio-fullwidth.html">Portfolio fullwidth</a></li>
                                 <li><a href="portfolio-3columns.html">Portfolio 3 clumns</a></li>
@@ -54,7 +54,7 @@
                         </li>
                         <li><a href="#">Contact</a></li>
                         <li>
-                            <a href="blog-list.html">Blog</a>
+                            <a href="{{url('/blog')}}">Blog</a>
                             <ul class="sub-menu">
                                 <li><a href="blog-list.html">Blog list</a></li>
                                 <li><a href="blog-grid-2columns.html">Blog Grid 2 columns</a></li>

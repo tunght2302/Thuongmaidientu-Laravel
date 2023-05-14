@@ -15,6 +15,7 @@ class HomeController extends Controller
         $product = Products::paginate(8);
         return view('client.index', compact('product'));
     }
+    
     public function shop()
     {
         $categories = Categories::all();
@@ -25,6 +26,8 @@ class HomeController extends Controller
     public function product_by_category($category_name)
     {
         $categories = Categories::all();
+        // Đây là một truy vấn sử dụng model Categories để tìm kiếm các bản ghi
+        // trong bảng Categories với trường category_name bằng với giá trị được cung cấp ($category_name).
         $category = Categories::where('category_name',$category_name)->firstOrFail();
         $products = Products::where('category','=', $category->category_name)->get();
         return view('client.product_by_category', compact('categories','category', 'products'));

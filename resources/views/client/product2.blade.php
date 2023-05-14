@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="leka-product-grid">
-                <p style="font-size: 30px">NEW PRODUCT</p>
+                <p style="font-size: 30px">TOP FAVORITE PRODUCTS</p>
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-12 product">
                         <div class="product-thumb">
