@@ -41,7 +41,11 @@
                                             {{ number_format($products->price) }}VNĐ</span>
                                     @endif
                                 </div>
-                                <a href="#" class="button-add-to-cart">ADD TO CART</a>
+                                <form action="{{url('/add_cart',$products->id)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                    <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">
+                                </form>
                             </div>
                         </div>
                     @endforeach

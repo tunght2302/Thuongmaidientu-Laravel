@@ -52,5 +52,7 @@ Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 Route::get('/product_detail/{id}',[HomeController::class,'product_detail']);
 // Filter Product by Category
 Route::get('/product_by_category/{category_name}',[HomeController::class,'product_by_category']);
+// Add to Cart
+Route::post('/add_cart/{id}',[HomeController::class,'add_cart']);
 
 
