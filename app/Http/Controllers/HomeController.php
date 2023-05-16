@@ -18,16 +18,16 @@ class HomeController extends Controller
             return view('admin.home');
         } else {
             $product = Products::paginate(8);
-            $pro_view = Products::orderBy('view', 'desc')->get();
-            return view('client.index', compact('product','pro_view'));
+            $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
+            return view('client.index', compact('product', 'pro_view'));
         }
     }
     // Trang chủ
     public function index()
     {
         $product = Products::paginate(8);
-        $pro_view = Products::orderBy('view','DESC')->take(8)->get();
-        return view('client.index', compact('product','pro_view'));
+        $pro_view = Products::orderBy('view', 'DESC')->take(8)->get();
+        return view('client.index', compact('product', 'pro_view'));
     }
     // Trang shop
     public function shop()
@@ -57,30 +57,48 @@ class HomeController extends Controller
         return view('client.product_by_category', compact('categories', 'category', 'products'));
     }
 
-    public function add_cart(REQUEST $request,$id)
+    public function add_cart(REQUEST $request, $id)
     {
         if (Auth::check()) {
-           $user = Auth::user();
-           $product = Products::find($id);
+            $user = Auth::user();
+            $product = Products::find($id);
 
-           $cart = new Carts;
-           $cart->user_id = $user->id;
-           $cart->name = $user->name;
-           $cart->email = $user->email;
-           $cart->phone = $user->phone;
-           $cart->address = $user->address;
+            $cart = new Carts;
+            $cart->user_id = $user->id;
+            $cart->name = $user->name;
+            $cart->email = $user->email;
+            $cart->phone = $user->phone;
+            $cart->address = $user->address;
 
-           $cart->product_id = $product->id;
-           $cart->product_title = $product->title;
-           $cart->price = $product->price;
-           $cart->quantity = $request->quantity;
-           $cart->image = $product->image;
+            $cart->product_id = $product->id;
+            $cart->product_title = $product->title;
+            $cart->price = $product->price;
+            $cart->quantity = $request->quantity;
+            $cart->image = $product->image;
 
-           $cart->save();
-           return redirect()->back();
-
+            $cart->save();
+            return redirect()->back();
         } else {
             return redirect('login');
         }
+    }
+
+    public function show_cart()
+    {
+        if (Auth::check()) {
+            $id = Auth::user()->id;
+            $carts = Carts::where('user_id','=', $id)->get();
+            // dd($carts);
+            return view('client.show_cart', compact('carts'));
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function delete_cart($id){
+        $delete_cart = Carts::find($id);
+        $delete_carts = Carts::all();
+        $delete_cart->delete();
+        return redirect()->back();
     }
 }

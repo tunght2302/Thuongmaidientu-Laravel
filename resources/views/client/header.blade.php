@@ -74,43 +74,7 @@
                 <!-- ./Icon search -->
                 <!-- Mini cart -->
                 <div class="mini-cart">
-                    <a class="icon" href="#">Cart <span class="count">2</span></a>
-                    <div class="mini-cart-content">
-                        <ul class="list-cart-product">
-                            <li>
-
-                                <div class="product-thumb">
-                                    <a href="#"><img src="client/images/products/product-cart1.jpg"
-                                            alt="" /></a>
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name"><a href="#">Ledtead Predae</a></h5>
-                                    <span class="price">$90.00</span>
-                                    <span class="qty">Qty: 1 - Size: L</span>
-                                    <a href="#" class="remove">remove</a>
-                                </div>
-                            </li>
-                            <li>
-
-                                <div class="product-thumb">
-                                    <a href="#"><img src="client/images/products/product-cart2.jpg"
-                                            alt="" /></a>
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name"><a href="#">Ledtead Predae</a></h5>
-                                    <span class="price">$90.00</span>
-                                    <span class="qty">Qty: 1 - Size: M</span>
-                                    <a href="#" class="remove">remove</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <p class="sub-toal-wapper">
-                            <span>SUBTOTAL</span>
-                            <span class="sub-toal">$180.00</span>
-                        </p>
-                        <a href="#" class="btn-view-cart">VIEW SHOPPING CART</a>
-                        <a href="#" class="btn-check-out">PROCESS TO CHECK OUT</a>
-                    </div>
+                    <a class="icon" href="{{url('/show_cart')}}">Cart</a>
                 </div>
                 <!-- ./Mini cart -->
             </div>
