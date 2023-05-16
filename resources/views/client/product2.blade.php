@@ -4,145 +4,41 @@
             <div class="leka-product-grid">
                 <p style="font-size: 30px">TOP FAVORITE PRODUCTS</p>
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product9.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
+                    @foreach ($pro_view as $products)
+                        <div class="col-md-3 col-sm-6 col-xs-12 product">
+                            <div class="product-thumb">
+                                <a href="{{url('product_detail',$products->id)}}">
+                                    <img src="/upload/{{ $products->image }}" style="width: 180px;height: 170px" alt="">
+                                </a>
+                                <div class="product-button">
+                                    <a href="#" class="button-compare">Compare</a>
+                                    <a href="#" class="button-wishlist">Wishlist</a>
+                                    <a href="{{ url('product_detail', $products->id) }}" class="button-quickview">Quick
+                                        view</a>
+                                </div>
+                            </div>
+                            
+                            <div class="product-info">
+                                <a href="{{url('product_detail',$products->id)}}"><h3>{{ $products->title }}</h3></a>
+                                <div style="display: flex;">
+                                    @if ($products->discount_price != null)
+                                        <span class="product-price"
+                                            style="margin-left: 5px;text-decoration-line: line-through;color:gray">{{ number_format($products->discount_price) }}VNĐ</span>
+                                        <span class="product-price" style="margin-left: 5px">
+                                            {{ number_format($products->price) }}VNĐ</span>
+                                    @else
+                                        <span class="product-price">
+                                            {{ number_format($products->price) }}VNĐ</span>
+                                    @endif
+                                </div>
+                                <form action="{{url('/add_cart',$products->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                    <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">
+                                </form>
                             </div>
                         </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <div style="display: flex;">
-                                <span class="product-price" style="margin-left: 30px;text-decoration-line: line-through;color:gray">$89.00</span>
-                                <span class="product-price" style="margin-left: 10px">$89.00</span>
-                            </div>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product10.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Long Tube Dress</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product11.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Lace Dress</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product12.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Tunic with</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product13.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product14.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Long Tube Dress</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product15.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Lace Dress</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product16.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Tunic with</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

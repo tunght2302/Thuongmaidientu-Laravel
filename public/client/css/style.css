@@ -3997,9 +3997,9 @@ blockquote{
     font-size: 10px;
     text-transform: uppercase;
 }
-.widget ul li:last-child{
+/* .widget ul li:last-child{
     border:none;
-}
+} */
 .widget ul li a{
     color: #303030;
     margin-left: 20px;

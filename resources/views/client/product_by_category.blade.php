@@ -74,32 +74,31 @@
                                 </div>
                             </div>
                             <div class="product-info">
-                                <h3><a href="#">{{ $product->title }}</a></h3>
+                                <a href="{{url('product_detail',$product->id)}}"><h3>{{ $product->title }}</h3></a>
                                 <div style="display: flex;">
                                     @if ($product->discount_price != null)
                                         <span class="product-price"
-                                            style="margin-left: 25px;text-decoration-line: line-through;color:gray">{{ number_format($product->discount_price) }}VNĐ</span>
-                                        <span class="product-price" style="margin-left: 25px">
+                                            style="margin-left: 5px;text-decoration-line: line-through;color:gray">{{ number_format($product->discount_price) }}VNĐ</span>
+                                        <span class="product-price" style="margin-left: 5px">
                                             {{ number_format($product->price) }}VNĐ</span>
                                     @else
-                                        <span class="product-price" style="margin-left: 5px">
+                                        <span class="product-price">
                                             {{ number_format($product->price) }}VNĐ</span>
                                     @endif
                                 </div>
-                                <a href="#" class="button-add-to-cart">ADD TO CART</a>
+                                <form action="{{url('/add_cart',$product->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                    <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">
+                                </form>
                             </div>
                         </li>
                         @endforeach
                     </ul>
                     <nav class="pagination">
-                        <ul>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
+                        <div style="display: flex;justify-content: center;width: 100%;">
+                            {{ $products->links() }}
+                        </div>
                     </nav>
                     <!-- ./ List Products -->
                 </div>

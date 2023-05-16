@@ -28,8 +28,9 @@
                                         view</a>
                                 </div>
                             </div>
+                            
                             <div class="product-info">
-                                <h3><a href="#">{{ $products->title }}</a></h3>
+                                <a href="{{url('product_detail',$products->id)}}"><h3>{{ $products->title }}</h3></a>
                                 <div style="display: flex;">
                                     @if ($products->discount_price != null)
                                         <span class="product-price"
@@ -37,11 +38,11 @@
                                         <span class="product-price" style="margin-left: 5px">
                                             {{ number_format($products->price) }}VNĐ</span>
                                     @else
-                                        <span class="product-price" style="margin-left: 5px">
+                                        <span class="product-price">
                                             {{ number_format($products->price) }}VNĐ</span>
                                     @endif
                                 </div>
-                                <form action="{{url('/add_cart',$products->id)}}" method="post">
+                                <form action="{{url('/add_cart',$products->id)}}" method="POST">
                                     @csrf
                                     <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
                                     <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">

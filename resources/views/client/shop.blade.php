@@ -59,34 +59,47 @@
                     <!-- List products -->
                     <ul class="products row">
                         @foreach ($product as $products)
-                        <li class="product col-sm-6 col-md-4">
-                            <div class="product-thumb">
-                                <a href="{{url('product_detail',$products->id)}}">
-                                    <img src="/upload/{{ $products->image }}" style="width: 300px;height: 280px" alt="">
-                                </a>
-                                <div class="product-button">
-                                    <a href="#" class="button-compare">Compare</a>
-                                    <a href="#" class="button-wishlist">Wishlist</a>
-                                    <a href="{{ url('product_detail', $products->id) }}" class="button-quickview">Quick
-                                        view</a>
+                            <li class="product col-sm-6 col-md-4">
+                                <div class="product-thumb">
+                                    <a href="{{ url('product_detail', $products->id) }}">
+                                        <img src="/upload/{{ $products->image }}" style="width: 300px;height: 280px"
+                                            alt="">
+                                    </a>
+                                    <div class="product-button">
+                                        <a href="#" class="button-compare">Compare</a>
+                                        <a href="#" class="button-wishlist">Wishlist</a>
+                                        <a href="{{ url('product_detail', $products->id) }}"
+                                            class="button-quickview">Quick
+                                            view</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="#">{{ $products->title }}</a></h3>
-                                <div style="display: flex;">
-                                    @if ($products->discount_price != null)
-                                        <span class="product-price"
-                                            style="margin-left: 25px;text-decoration-line: line-through;color:gray">{{ number_format($products->discount_price) }}VNĐ</span>
-                                        <span class="product-price" style="margin-left: 25px">
-                                            {{ number_format($products->price) }}VNĐ</span>
-                                    @else
-                                        <span class="product-price" style="margin-left: 5px">
-                                            {{ number_format($products->price) }}VNĐ</span>
-                                    @endif
+                                <div class="product-info">
+                                    <h3><a href="{{ url('product_detail', $products->id) }}">{{ $products->title }}</a>
+                                    </h3>
+                                    <div style="display: flex;">
+                                        @if ($products->discount_price != null)
+                                            <span class="product-price"
+                                                style="margin-left: 30px;text-decoration-line: line-through;color:gray">{{ number_format($products->discount_price) }}VNĐ</span>
+                                            <span class="product-price" style="margin-left: 15px">
+                                                {{ number_format($products->price) }}VNĐ</span>
+                                        @else
+                                            <div style="margin-left: 70px">
+                                                <span class="product-price">
+                                                    {{ number_format($products->price) }}VNĐ
+                                                </span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <form action="{{ url('/add_cart', $products->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="button-add-to-cart"
+                                            style="background-color: rgb(236, 232, 232);color: black">ADD TO
+                                            CART</button>
+                                        <input type="number" class="button-compare" value="1" min="1"
+                                            name="quantity" style="width:45px;height:40px;border:none">
+                                    </form>
                                 </div>
-                                <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                            </div>
-                        </li>
+                            </li>
                         @endforeach
                     </ul>
                     <nav class="pagination">
@@ -99,16 +112,16 @@
                 <!-- Sliderbar -->
                 <div class="col-sm-4 col-md-3 sidebar">
                     <!-- Product category -->
-                    <div class="widget widget_product_categories">
+                    <div class="widget widget_product_categories" >
                         <h2 class="widget-title">By Categories</h2>
-                        @foreach($categories as $category)
-                        <div style="margin-left: 20px">
-                            <a href="{{url('product_by_category',$category->category_name)}}">
-                                <ul class="product-categories">
-                                    <li>{{$category->category_name}}</li>
-                                </ul>
-                            </a>
-                        </div>
+                        @foreach ($categories as $category)
+                            <div>
+                                <a href="{{ url('product_by_category', $category->category_name) }}">
+                                    <ul  class="product-categories">
+                                        <li>{{ $category->category_name }}</li>
+                                    </ul>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
                     <!-- ./Product category -->
@@ -116,12 +129,12 @@
                     <div class="widget widget_layered_nav">
                         <h2 class="widget-title">BY COLORS</h2>
                         <ul>
-                            <li><a href="#">RED</a></li>
-                            <li><a href="#">BLUE</a></li>
-                            <li><a href="#">CYAN</a></li>
-                            <li><a href="#">ORANGER</a></li>
-                            <li><a href="#">BLACK & WHITE</a></li>
-                            <li><a href="#">PURPULE</a></li>
+                            <li>RED</li>
+                            <li>BLUE</li>
+                            <li>CYAN</li>
+                            <li>ORANGER</li>
+                            <li>BLACK & WHITE</li>
+                            <li>PURPULE</li>
                         </ul>
                     </div>
                     <!-- ./Filter color -->

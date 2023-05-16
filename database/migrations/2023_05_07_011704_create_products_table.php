@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('quantity')->nullable();
             $table->string('price')->nullable();
             $table->string('discount_price')->nullable();
+            $table->string('view')->nullable();
             $table->timestamps();
         });
     }

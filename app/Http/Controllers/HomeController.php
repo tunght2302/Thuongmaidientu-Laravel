@@ -18,14 +18,16 @@ class HomeController extends Controller
             return view('admin.home');
         } else {
             $product = Products::paginate(8);
-            return view('client.index', compact('product'));
+            $pro_view = Products::orderBy('view', 'desc')->get();
+            return view('client.index', compact('product','pro_view'));
         }
     }
     // Trang chủ
     public function index()
     {
         $product = Products::paginate(8);
-        return view('client.index', compact('product'));
+        $pro_view = Products::orderBy('view','DESC')->take(8)->get();
+        return view('client.index', compact('product','pro_view'));
     }
     // Trang shop
     public function shop()
@@ -38,6 +40,8 @@ class HomeController extends Controller
     public function product_detail($id)
     {
         $product = Products::find($id);
+        $product->view += 1;
+        $product->save();
         return view('client.product_detail', compact('product'));
     }
     // Lọc sản phẩm theo danh mục
@@ -49,13 +53,13 @@ class HomeController extends Controller
         $category = Categories::where('category_name', $category_name)->firstOrFail();
         //Tìm tất cả các sản phẩm có trường category bằng với (category_name) của danh mục đã được tìm thấy ở dòng trước đó.
         //Các sản phẩm tương ứng được lấy ra thông qua phương thức get() và gán vào biến $products.
-        $products = Products::where('category', '=', $category->category_name)->get();
+        $products = Products::where('category', '=', $category->category_name)->paginate(9);
         return view('client.product_by_category', compact('categories', 'category', 'products'));
     }
 
     public function add_cart(REQUEST $request,$id)
     {
-        if (Auth::id()) {
+        if (Auth::check()) {
            $user = Auth::user();
            $product = Products::find($id);
 
