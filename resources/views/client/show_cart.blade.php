@@ -145,7 +145,7 @@
                                 </tbody>
                             </table>
                             <div class="wc-proceed-to-checkout">
-                                <a href="#" class="checkout-button button alt wc-forward">PROCEED TO
+                                <a href="{{url('/check_out')}}" class="checkout-button button alt wc-forward">PROCEED TO
                                     CHECKOUT</a>
                             </div>
                         </div>

@@ -4,16 +4,16 @@
             @if (Route::has('login'))
                 @auth
                 <ul>
-                    <li>
-                        <x-app-layout>
+                    <li >
+                        <x-app-layout >
                         </x-app-layout>
                     </li>
                 </ul>
                     
                 @else
                     <ul>
-                        <li><a  href="{{ route('login') }}"><i class="fa fa-key"></i> LOGIN</a></li>
-                        <li><a href="{{ route('register') }}"><i class="fa fa-user"></i> REGISTER</a></li>
+                        <li><a style="color: aliceblue"  href="{{ route('login') }}"><i class="fa fa-key"></i> LOGIN</a></li>
+                        <li><a style="color: aliceblue"href="{{ route('register') }}"><i class="fa fa-user"></i> REGISTER</a></li>
                     </ul>
                 @endauth
             @endif
@@ -44,7 +44,7 @@
                        
                         <li><a href="{{url('/shop')}}">Shop</a></li>
                         <li>
-                            <a href="/checkout">Check out</a>
+                            <a href="/check_out">Check out</a>
                             <ul class="sub-menu">
                                 <li><a href="portfolio-fullwidth.html">Portfolio fullwidth</a></li>
                                 <li><a href="portfolio-3columns.html">Portfolio 3 clumns</a></li>

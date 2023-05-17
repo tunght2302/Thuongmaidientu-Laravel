@@ -1468,7 +1468,7 @@ latest blog
 }
 .header.header-style3 .top-header a,
 .header.header-style3 .top-header a .fa{
-    color: #fff;
+    /* color: #fff; */
 }
 .header.header-style3 .top-header a:hover,
 .header.header-style3 .top-header a:focus{

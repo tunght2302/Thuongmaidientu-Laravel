@@ -60,73 +60,35 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form">
                             <h3 class="form-title">BILLING DETAILS</h3>
-                            <p>
-                            required
-                                <label>Country <span class="required">*</span></label>
-                                <select>
-                                    <option>United states</option>
-                                    <option>Hanoi</option>
-                                </select>
-                            </p>
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <p>
-                                        <label>FIRST NAME <span class="required">*</span></label>
-                                        <input type="text" />
-                                    </p>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <p>
                                         <label>LAST NAME <span class="required">*</span></label>
-                                        <input type="text" />
+                                        <input type="text" value="{{ $data->name }}" name="name" />
                                     </p>
                                 </div>
                             </div>
-                            <p>
-                                <label>COMPANY NAME</label>
-                                <input type="text" />
-                            </p>
-                            <p>
-                                <label>ADDRESS <span class="required">*</span></label>
-                                <select>
-                                    <option>Street address</option>
-                                    <option>No 1</option>
-                                </select>
-                            </p>
-                            <p>
-                                <input type="text" placeholder="Apartment, suite, unit etc (optional)" />
-                            </p>
-                            <p>
-                                <label>TOWN / CITY <span class="required">*</span></label>
-                                <select>
-                                    <option>United states</option>
-                                </select>
-                            </p>
-                            <p>
-                                <label>POSTAL / ZIP CODE <span class="required">*</span></label>
-                                <input type="text" />
-                            </p>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p>
-                                        <label>EMAIL ADDRESS <span class="required">*</span></label>
-                                        <input type="email" />
+                                        <label>Email <span class="required">*</span></label>
+                                        <input type="text" value="{{ $data->email }}" name="email" />
                                     </p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
-                                        <label>PHONE NUMBER <span class="required">*</span></label>
-                                        <input type="email" />
+                                        <label>Phone <span class="required">*</span></label>
+                                        <input type="text" value="{{ $data->phone }}" name="phone" />
                                     </p>
                                 </div>
                             </div>
-                            <div>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox1" value="option1"> CREATE AN ACCOUNT ?
-                                </label>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SHIP TO BILLING ADDRESS ?
-                                </label>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p>
+                                        <label>Address <span class="required">*</span></label>
+                                        <input type="text" value="{{ $data->address }}" name="address" />
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,31 +99,31 @@
                                 <tbody>
                                     <tr>
                                         <td>Product name</td>
-                                        <td>Qty</td>
+                                        <td>Quantity</td>
+                                        <td>Price</td>
                                         <td>Sub total</td>
                                     </tr>
-                                    <tr>
-                                        <td>FLUSAS DEMIN DRESS</td>
-                                        <td>01</td>
-                                        <td><span class="amount">$252.56</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">CART SUBTOTAL</td>
-                                        <td>
-                                            <span class="amount">$252.56</span>
-                                        </td>
-                                    </tr>
+                                    <?php $total = 0; ?>
+                                    @foreach ($data_cart as $cart)
+                                        <?php $sub_total = $cart->quantity * $cart->price; ?>
+                                        <?php $total += $sub_total; ?>
+                                        <tr>
+                                            <td>{{ $cart->product_title }}</td>
+                                            <td>{{ $cart->quantity }}</td>
+                                            <td>{{ number_format($cart->price) }} VNĐ</td>
+                                            <td><span class="amount">{{ number_format($sub_total) }} VNĐ</span></td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
                                         <td colspan="2">SHIPPING & HANDLING</td>
                                         <td>
-                                            FREE SHIPPINg
+                                            FREE SHIPPING
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">ORDER TOTAL</td>
                                         <td>
-                                            <span class="amount">$252.56</span>
-                                            
+                                            <span class="amount">{{ number_format($total) }} VNĐ</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -171,32 +133,26 @@
                             <h3 class="form-title">PAYMENT METHOD</h3>
                             <div class="checkbox">
                                 <label>
-                                <input type="checkbox" value="">
-                                SHIP TO BILLING ADDRESS ?
-                                </label>
-                                <br />
-                                <small>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</small>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox" value="">
-                                CEQUE PAYMENT
+                                    <input type="checkbox" value="">
+                                    SHIP TO BILLING ADDRESS ?
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input type="checkbox" value="">
-                                PAYPAL
+                                    <input type="checkbox" value="">
+                                    PAYPAL
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input type="checkbox" value="">
-                                I’VE READ AND ACCEPT THE TEMR & CONDITIONS
+                                    <input type="checkbox" value="">
+                                    I’VE READ AND ACCEPT THE TEMR & CONDITIONS
                                 </label>
                             </div>
                         </div>
+                       <a href="{{url('cash_order')}}">
                         <button class="button pull-right">PLACE ODER NOW</button>
+                    </a> 
                     </div>
                 </div>
             </div>

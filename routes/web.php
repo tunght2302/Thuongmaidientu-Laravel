@@ -20,9 +20,9 @@ Route::get('/shop',[HomeController::class,'shop']);
 Route::get('/blog', function () {
     return view('client.blog');
 });
-Route::get('/checkout', function () {
-    return view('client.checkout');
-});
+
+Route::get('/check_out',[HomeController::class,'check_out']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -56,6 +56,7 @@ Route::get('/product_by_category/{category_name}',[HomeController::class,'produc
 Route::post('/add_cart/{id}',[HomeController::class,'add_cart']); // Add to cart
 Route::get('/show_cart',[HomeController::class,'show_cart']); // Show cart
 Route::get('/delete_cart/{id}',[HomeController::class,'delete_cart']); // Delete products in cart
+Route::get('/cash_order',[HomeController::class,'cash_order']); // Cash order
 
 
 
