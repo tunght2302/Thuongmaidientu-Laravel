@@ -114,6 +114,25 @@ class HomeController extends Controller
         $delete_cart->delete();
         return redirect()->back();
     }
+    public function update_cart(Request $request)
+    {
+        $cartId = $request->cart_id;
+        $quantity = $request->quantity;
+
+        $cart = Carts::find($cartId);
+        if ($cart) {
+            $cart->quantity = $quantity;
+            $cart->save();
+        }
+        return redirect()->back();
+        // Tiếp tục xử lý hoặc chuyển hướng tới trang khác nếu cần thiết
+    }
+    public function cart_destroy()
+    {
+        Carts::truncate();
+
+        return redirect()->back();
+    }
 
     public function check_out()
     {
@@ -151,6 +170,6 @@ class HomeController extends Controller
             $delete_cart->delete();
             $order->save();
         }
-        return redirect()->back();
+        return redirect()->back()->with('success_message', 'Đặt hàng thành công');
     }
 }

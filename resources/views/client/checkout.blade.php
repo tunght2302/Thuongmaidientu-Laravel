@@ -64,7 +64,7 @@
                                 <div class="col-sm-12">
                                     <p>
                                         <label>LAST NAME <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->name }}" name="name" />
+                                        <input type="text" value="{{ $data->name }}" name="name" disabled />
                                     </p>
                                 </div>
                             </div>
@@ -72,13 +72,13 @@
                                 <div class="col-sm-6">
                                     <p>
                                         <label>Email <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->email }}" name="email" />
+                                        <input type="text" value="{{ $data->email }}" name="email" disabled />
                                     </p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->phone }}" name="phone" />
+                                        <input type="text" value="{{ $data->phone }}" name="phone" disabled />
                                     </p>
                                 </div>
                             </div>
@@ -86,12 +86,22 @@
                                 <div class="col-sm-12">
                                     <p>
                                         <label>Address <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->address }}" name="address" />
+                                        <input type="text" value="{{ $data->address }}" name="address" disabled />
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @if (session('success_message'))
+                        <script>
+                            Swal.fire({
+                                title: 'Thành công',
+                                text: '{{ session('success_message') }}',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        </script>
+                    @endif
                     <div class="col-sm-12 col-md-6">
                         <h3 class="form-title">YOUR ODERS</h3>
                         <div class="order-review">
@@ -150,9 +160,9 @@
                                 </label>
                             </div>
                         </div>
-                       <a href="{{url('cash_order')}}">
-                        <button class="button pull-right">PLACE ODER NOW</button>
-                    </a> 
+                        <a href="{{ url('cash_order') }}">
+                            <button  class="button pull-right">PLACE ODER NOW</button>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -69,47 +69,49 @@
                 </thead>
                 <?php $total = 0 ?>
                 <tbody>
-                    @foreach ($carts as $cart)
-                    <?php $total_price = $cart->quantity * $cart->price ?>
-                    <?php $total += $total_price ?>
-                        <tr class="cart_item">
-                            <td class="product-name">
-                                <h3 href="#">{{ $cart->product_title }}</h3>
-                            </td>
-                            <td class="product-thumbnail">
-                                <div style="margin-left: 60px">
-                                    <img src="/upload/{{ $cart->image }}" style="width: 180px;height: 170px;"
-                                    alt="" />
-                                </div>
-                            </td>
-                            <td class="product-quantity">
-                                <div >
-                                    <input type="number" step="1" min="1" name="quantity" value="{{$cart->quantity}}"
-                                    style="width: 50px;heigth:50px;border:1.5px solid black;border-radius:3px">
-                                </div>
-                            </td>
-                            <td class="product-price">
-                                <span class="amount">{{number_format($cart->price)}}VNĐ</span>
-                            </td>
-                            <td class="product-subtotal">
-                                <span class="amount">{{number_format($total_price)}}VNĐ</span>
-                            </td>
-                            <td class="product-remove">
-                                <a class="remove" onclick="return confirm('Are you sure to delete Product?')" href="{{url('delete_cart',$cart->id)}}"><i class="fa fa-times"></i></a>
+                    <form action="{{url('/update_cart')}}" method="POST">
+                        @csrf
+                        @foreach ($carts as $cart)
+                        <?php $total_price = $cart->quantity * $cart->price ?>
+                        <?php $total += $total_price ?>
+                            <tr class="cart_item">
+                                <input type="hidden" name="cart_id" value="{{ $cart->id }}">
+                                <td class="product-name">
+                                    <h3 href="#">{{ $cart->product_title }}</h3>
+                                </td>
+                                <td class="product-thumbnail">
+                                    <div style="margin-left: 60px">
+                                        <img src="/upload/{{ $cart->image }}" style="width: 180px;height: 170px;"
+                                        alt="" />
+                                    </div>
+                                </td>
+                                <td class="product-quantity">
+                                    <div >
+                                        <input type="number" step="1" min="1" name="quantity" value="{{$cart->quantity}}"
+                                        style="width: 50px;heigth:50px;border:1.5px solid black;border-radius:3px">
+                                    </div>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">{{number_format($cart->price)}}VNĐ</span>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">{{number_format($total_price)}}VNĐ</span>
+                                </td>
+                                <td class="product-remove">
+                                    <a class="remove" onclick="return confirm('Are you sure to delete Product?')" href="{{url('delete_cart',$cart->id)}}"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td colspan="6" class="actions">
+                                <input type="submit" class="button" name="update_cart" value="UPDATE SHOPPING CART">
                             </td>
                         </tr>
-                    @endforeach
-                    {{-- <tr style="border-bottom:2px solid #e9e9e9">
-                        <td class="product-name">
-                            <h3>Total</h3>
-                        </td>
-                        <td style="font-size: 25px">{{ number_format($total)}} VNĐ</td>
-                    </tr> --}}
+                    </form>
                     <tr>
-                        <td colspan="6" class="actions">
-                          <a href="{{url('/shop')}}"><button class="button pull-left">CONTINUE SHOPPING</button></a>
-                            <input type="submit" class="button" name="update_cart" value="UPDATE SHOPPING CART">
-                            <button class="button">CLEAR SHOPPING CART</button>
+                        <td colspan="3" class="actions">
+                        <a href="{{url('/shop')}}"><button class="button pull-left" style="margin-right: 20px">CONTINUE SHOPPING</button></a>
+                        <a href="{{url('/cart_destroy')}}"><button class="button pull-left">CLEAR SHOPPING CART</button></a>
                         </td>
                     </tr>
                 </tbody>

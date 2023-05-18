@@ -15,3 +15,4 @@
     <script type="text/javascript" src="client/js/jquery.actual.min.js"></script>
     <script type="text/javascript" src="client/js/blog-masonry.js"></script>
     <script type="text/javascript" src="client/js/custom.js"></script>
+    <script type="text/javascript" src="client/js/sweetalert2.js"></script>
