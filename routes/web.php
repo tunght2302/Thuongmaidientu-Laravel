@@ -33,14 +33,13 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/redirect',[HomeController::class,'redirect']);
+Route::get('/redirect',[HomeController::class,'redirect'])->middleware('auth','verified');
 // Categories
 Route::get('/view_category',[AdminController::class,'view_category']);
 Route::post('/add_category',[AdminController::class,'add_category']);
 Route::get('/update_category_view/{id}',[AdminController::class,'update_category_view']);
 Route::post('/update_category/{id}',[AdminController::class,'update_category']);
 Route::get('/delete_category/{id}',[AdminController::class,'delete_category']);
-
 // Products
 Route::get('/view_product',[AdminController::class,'view_product']);
 Route::post('/add_product',[AdminController::class,'add_product']);
@@ -51,7 +50,6 @@ Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 //Orders
 Route::get('/order',[AdminController::class,'order']);
 Route::post('/delivered/{id}',[AdminController::class,'delivered']);
-
 // Product Details
 Route::get('/product_detail/{id}',[HomeController::class,'product_detail']);
 // Filter Product by Category
