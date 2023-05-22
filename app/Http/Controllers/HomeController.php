@@ -162,7 +162,7 @@ class HomeController extends Controller
             $order->product_id = $data_order->product_id;
 
             $order->payment_status = 'Cash on delivery';
-            $order->delivery_status = 'Processing';
+            $order->delivery_status = 'Chờ xử lý';
 
             $cart_id = $data_order->id;
             $delete_cart = Carts::find($cart_id);

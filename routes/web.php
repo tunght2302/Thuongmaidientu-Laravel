@@ -48,6 +48,10 @@ Route::get('/list_product',[AdminController::class,'list_product']);
 Route::get('/update_product_view/{id}',[AdminController::class,'update_product_view']);
 Route::post('/update_product/{id}',[AdminController::class,'update_product']);
 Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
+//Orders
+Route::get('/order',[AdminController::class,'order']);
+Route::post('/delivered/{id}',[AdminController::class,'delivered']);
+
 // Product Details
 Route::get('/product_detail/{id}',[HomeController::class,'product_detail']);
 // Filter Product by Category
