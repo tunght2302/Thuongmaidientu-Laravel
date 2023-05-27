@@ -64,7 +64,7 @@ class HomeController extends Controller
         $products = Products::where('category', '=', $category->category_name)->paginate(9);
         return view('client.product_by_category', compact('categories', 'category', 'products'));
     }
-
+    // Thêm sản phẩm vào giỏ hàng
     public function add_cart(Request $request, $id)
     {
         if (Auth::check()) {
@@ -100,7 +100,7 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
-
+    // giỏ hàng
     public function show_cart()
     {
         if (Auth::check()) {
@@ -111,13 +111,14 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
-
+    // Xoá sản phẩm trong giỏ hàng
     public function delete_cart($id)
     {
         $delete_cart = Carts::find($id);
         $delete_cart->delete();
         return redirect()->back();
     }
+    // Update sản phẩm trong giỏ hàng
     public function update_cart(Request $request)
     {
         $cartItems = $request->cart_items;
@@ -134,13 +135,14 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật giỏ hàng thành công');
     }
+    // Xoá toàn bộ giỏ hàng
     public function cart_destroy()
     {
         Carts::truncate();
 
         return redirect()->back();
     }
-
+    // Check out
     public function check_out()
     {
         $data = Auth::user();
@@ -148,7 +150,7 @@ class HomeController extends Controller
         $data_cart = Carts::where('user_id', '=', $id)->get();
         return view('client.checkout', compact('data', 'data_cart'));
     }
-
+    
     public function cash_order()
     {
         $id = Auth::user()->id;
@@ -178,5 +180,24 @@ class HomeController extends Controller
             $order->save();
         }
         return redirect()->back()->with('success_message', 'Đặt hàng thành công');
+    }
+
+    public function order(){
+        if(Auth::check()){
+            $user = Auth::user();
+            $order = Orders::where('user_id', $user->id)->get();
+            return view('client.order',compact('order'));
+        }else{
+            return redirect('login');
+        }
+    }
+
+    public function cancel($id){
+        $order = Orders::find($id);
+
+        $order->delivery_status = 'Bạn đã huỷ đơn hàng';
+
+        $order->save();
+        return redirect()->back();
     }
 }

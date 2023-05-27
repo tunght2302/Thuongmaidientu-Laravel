@@ -45,23 +45,13 @@
                         <li><a href="{{url('/shop')}}">Shop</a></li>
                         <li>
                             <a href="/check_out">Check out</a>
-                            <ul class="sub-menu">
-                                <li><a href="portfolio-fullwidth.html">Portfolio fullwidth</a></li>
-                                <li><a href="portfolio-3columns.html">Portfolio 3 clumns</a></li>
-                                <li><a href="portfolio-masonry.html">Portfolio masonry</a></li>
-                                <li><a href="portfolio-detail.html">Portfolio detail</a></li>
-                            </ul>
                         </li>
                         <li><a href="#">Contact</a></li>
                         <li>
                             <a href="{{url('/blog')}}">Blog</a>
-                            <ul class="sub-menu">
-                                <li><a href="blog-list.html">Blog list</a></li>
-                                <li><a href="blog-grid-2columns.html">Blog Grid 2 columns</a></li>
-                                <li><a href="blog-grid-3columns.html">Blog Grid 3 columns</a></li>
-                                <li><a href="blog-masonry.html">Blog masonry</a></li>
-                                <li><a href="blog-detail.html">Blog Single post</a></li>
-                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{url('/order')}}">Order</a>
                         </li>
                     </ul>
                 </nav>
