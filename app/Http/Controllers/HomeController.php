@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,7 @@ class HomeController extends Controller
             return view('admin.home');
         } else {
             $product = Products::paginate(8);
-            $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
+            $pro_view = Products::orderBy('view', 'DESC')->take(8)->get();
             return view('client.index', compact('product', 'pro_view'));
         }
     }
@@ -43,9 +42,15 @@ class HomeController extends Controller
     public function product_detail($id)
     {
         $product = Products::find($id);
+        // dd($product);
         $product->view += 1;
+        if($product){
+            $cate = $product->category;
+            $simpro = Products::where('category','=',$cate)
+            ->where('id','!=',$id)->get();
+        }
         $product->save();
-        return view('client.product_detail', compact('product'));
+        return view('client.product_detail', compact('product','simpro'));
     }
     // Lọc sản phẩm theo danh mục
     public function product_by_category($category_name)
@@ -90,7 +95,6 @@ class HomeController extends Controller
 
                 $cart->save();
             }
-
             return redirect()->back();
         } else {
             return redirect('login');
@@ -116,16 +120,19 @@ class HomeController extends Controller
     }
     public function update_cart(Request $request)
     {
-        $cartId = $request->cart_id;
-        $quantity = $request->quantity;
+        $cartItems = $request->cart_items;
 
-        $cart = Carts::find($cartId);
-        if ($cart) {
-            $cart->quantity = $quantity;
-            $cart->save();
+        foreach ($cartItems as $cartItemId => $cartItemData) {
+            $cart = Carts::find($cartItemId);
+
+            if ($cart) {
+                $cart->quantity = $cartItemData['quantity'];
+                // Cập nhật các trường thông tin khác của giỏ hàng nếu cần
+                $cart->save();
+            }
         }
-        return redirect()->back();
-        // Tiếp tục xử lý hoặc chuyển hướng tới trang khác nếu cần thiết
+
+        return redirect()->back()->with('success', 'Cập nhật giỏ hàng thành công');
     }
     public function cart_destroy()
     {

@@ -75,19 +75,18 @@
                         <?php $total_price = $cart->quantity * $cart->price ?>
                         <?php $total += $total_price ?>
                             <tr class="cart_item">
-                                <input type="hidden" name="cart_id" value="{{ $cart->id }}">
+                                <input type="hidden" name="cart_items[{{ $cart->id }}][id]" value="{{ $cart->id }}">
                                 <td class="product-name">
                                     <h3 href="#">{{ $cart->product_title }}</h3>
                                 </td>
                                 <td class="product-thumbnail">
                                     <div style="margin-left: 60px">
-                                        <img src="/upload/{{ $cart->image }}" style="width: 180px;height: 170px;"
-                                        alt="" />
+                                        <img src="/upload/{{ $cart->image }}" style="width: 180px;height: 170px;" alt="" />
                                     </div>
                                 </td>
                                 <td class="product-quantity">
                                     <div >
-                                        <input type="number" step="1" min="1" name="quantity" value="{{$cart->quantity}}"
+                                        <input type="number" step="1" min="1" name="cart_items[{{ $cart->id }}][quantity]" value="{{$cart->quantity}}"
                                         style="width: 50px;heigth:50px;border:1.5px solid black;border-radius:3px">
                                     </div>
                                 </td>

@@ -16,7 +16,14 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                       
                         <h4 style="color: red;text-align: center;font-size: 30px;font:bold">ALL ORDER</h4>
+                        <div style="width: 300px;">
+                            <form action="{{url('/search')}}" method="GET" style="display: flex">
+                                <input type="text" class="form-control text-dark bg-light" name="search">
+                                <button type="submit" class="btn btn-success mx-3">Submit</button>
+                            </form>
+                        </div>
                         <div class="table-responsive mt-3">
                             <table class="table table-dark">
                                 <thead class="bg-light" >
@@ -31,10 +38,11 @@
                                         <th class="text-dark"> Price </th>
                                         <th class="text-dark"> Payment Status </th>
                                         <th class="text-dark"> Delivery Status </th>
-                                        <th></th>
+                                        <th> Send Email </th>
                                     </tr>
                                 </thead>
-                                @foreach ($all_order as $order)
+                                @forelse ($all_order as $order)
+                                    
                                     <tbody>
                                         <tr>
                                             <td >{{ $order->name }} </td>
@@ -62,9 +70,16 @@
                                                     <button type="submit" class="btn btn-info">Update</button>
                                                 </td>
                                             </form>
+                                            <td>
+                                                <a class="btn btn-success" href="{{url('send_email',$order->id)}}">Send Email</a>
+                                            </td>
                                         </tr>
                                     </tbody>
-                                @endforeach
+                                    @empty
+                                    <div>
+                                        <p class="text-danger">No Data Found</p>
+                                    </div>
+                                @endforelse
                             </table>
                         </div>
                     </div>

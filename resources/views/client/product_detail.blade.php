@@ -71,8 +71,7 @@
                         <form class="variations_form" action="{{ url('/add_cart', $product->id) }}" method="POST">
                             <div class="single_variation_wrap">
                                 @csrf
-                                <button type="submit" class="button-add-to-cart" style="width: 130px;height:40px"
-                                    style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                <button type="submit" class="button-add-to-cart" style="width: 150px;height:40px;padding: 0px;">ADD TO CART</button>
                                 <div class="box-qty">
                                     <input type="number" step="1" min="1" name="quantity" value="01"
                                         title="Qty" class="input-text qty text" size="4">
@@ -299,10 +298,11 @@
                 </div>
                 <div class="product-slide owl-carousel" data-dots="false" data-nav="true" data-margin="30"
                     data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                    @foreach($simpro as $pro)
                     <div class="product">
                         <div class="product-thumb">
                             <a href="single-product.html">
-                                <img src="client/images/products/product8.png" alt="">
+                                <img src="/upload/{{$pro->image}}" alt="">
                             </a>
                             <div class="product-button">
                                 <a href="#" class="button-compare">Compare</a>
@@ -311,96 +311,25 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product7.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
+                            <a href="{{url('product_detail',$pro->id)}}"><h3>{{ $pro->title }}</h3></a>
+                            <div style="display: flex;">
+                                @if ($pro->discount_price != null)
+                                    <span class="product-price"
+                                        style="padding-left:50px;text-decoration-line: line-through;color:gray">{{ number_format($pro->discount_price) }}VNĐ</span>
+                                    <span class="product-price" style="margin-left: 20px">{{ number_format($pro->price) }}VNĐ</span>
+                                @else
+                                    <span class="product-price">
+                                        {{ number_format($pro->price) }}VNĐ</span>
+                                @endif
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product6.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
+                            <form action="{{url('/add_cart',$pro->id)}}" method="POST">
+                                @csrf
+                                <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">
+                            </form>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product5.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product4.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="client/images/products/product3.png" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="#">Ledtead Predae</a></h3>
-                            <span class="product-price">$89.00</span>
-                            <a href="#" class="button-add-to-cart">ADD TO CART</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!--./related products-->

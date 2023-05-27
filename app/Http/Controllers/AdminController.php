@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Products;
 use App\Models\Orders;
+// use Notification;
+use App\Notifications\SendEmailNotifiCation;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -129,5 +132,36 @@ class AdminController extends Controller
         $order->save();
 
         return redirect()->back();
+    }
+
+    public function send_email($id){
+        $send_email = Orders::find($id);
+        return view('admin.orders.send_email',compact('send_email'));
+    }
+
+    public function send_email_user(REQUEST $request,$id){
+        $send_email_user = Orders::find($id);
+
+        $details = [
+            'greeting' => $request->greeting,
+            'firstline' => $request->firstline,
+            'body' => $request->body,
+            'button' => $request->button,
+            'url' => $request->url,
+            'lastline' => $request->lastline,
+        ];
+
+        Notification::send($send_email_user,new SendEmailNotification($details));
+        return redirect()->back();
+    }
+
+    public function search(REQUEST $request){
+        $search = $request->search;
+
+        $all_order = Orders::where('name','LIKE',"%$search%")
+                    ->orWhere('product_title','LIKE',"%$search%")
+                    ->get();
+
+        return view('admin.orders.order',compact('all_order'));
     }
 }
