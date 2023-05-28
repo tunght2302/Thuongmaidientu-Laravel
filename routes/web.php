@@ -69,6 +69,9 @@ Route::get('/search',[AdminController::class,'search']);
 //Order Clients
 Route::get('/order',[HomeController::class,'order']);
 Route::get('/cancel/{id}',[HomeController::class,'cancel']);
+//Comment
+Route::post('/comment/{id}',[HomeController::class,'comment']);
+
 
 
 

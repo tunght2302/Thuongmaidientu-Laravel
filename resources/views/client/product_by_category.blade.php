@@ -19,7 +19,7 @@
                 <h2 class="page-title">SHOP</h2>
                 <div class="breadcrumbs">
                     <a href="#">Home</a>
-                    <a href="#">Shop</a>
+                    <a href="{{url('/shop')}}">Shop</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\Categories;
 use App\Models\Carts;
 use App\Models\Orders;
+use App\Models\Comments;
 
 class HomeController extends Controller
 {
@@ -42,15 +43,16 @@ class HomeController extends Controller
     public function product_detail($id)
     {
         $product = Products::find($id);
-        // dd($product);
+        $comments = Comments::where('product_id', $product->id)->paginate(4);
+        $totalComments = Comments::where('product_id', $product->id)->count();
         $product->view += 1;
-        if($product){
+        if ($product) {
             $cate = $product->category;
-            $simpro = Products::where('category','=',$cate)
-            ->where('id','!=',$id)->get();
+            $simpro = Products::where('category', '=', $cate)
+                ->where('id', '!=', $id)->get();
         }
         $product->save();
-        return view('client.product_detail', compact('product','simpro'));
+        return view('client.product_detail', compact('product', 'comments', 'totalComments', 'simpro'));
     }
     // Lọc sản phẩm theo danh mục
     public function product_by_category($category_name)
@@ -150,7 +152,7 @@ class HomeController extends Controller
         $data_cart = Carts::where('user_id', '=', $id)->get();
         return view('client.checkout', compact('data', 'data_cart'));
     }
-    
+
     public function cash_order()
     {
         $id = Auth::user()->id;
@@ -182,22 +184,48 @@ class HomeController extends Controller
         return redirect()->back()->with('success_message', 'Đặt hàng thành công');
     }
 
-    public function order(){
-        if(Auth::check()){
+    public function order()
+    {
+        if (Auth::check()) {
             $user = Auth::user();
             $order = Orders::where('user_id', $user->id)->get();
-            return view('client.order',compact('order'));
-        }else{
+            return view('client.order', compact('order'));
+        } else {
             return redirect('login');
         }
     }
 
-    public function cancel($id){
+    public function cancel($id)
+    {
         $order = Orders::find($id);
 
         $order->delivery_status = 'Bạn đã huỷ đơn hàng';
 
         $order->save();
         return redirect()->back();
+    }
+
+    public function comment(REQUEST $request, $id)
+    {
+        if (Auth::check()) {
+            $product = Products::find($id);
+            $user = Auth::user();
+            $comment = new Comments();
+
+            $comment->name = $user->name;
+            $comment->user_id = $user->id;
+
+            $comment->content = $request->content;
+
+            $comment->product_title = $product->title;
+            $comment->product_id = $product->id;
+
+            $comment->save();
+
+
+            return redirect()->back();
+        } else {
+            return redirect('login');
+        }
     }
 }

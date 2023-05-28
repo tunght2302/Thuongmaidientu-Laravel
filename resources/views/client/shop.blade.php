@@ -18,7 +18,7 @@
                 <h2 class="page-title">SHOP</h2>
                 <div class="breadcrumbs">
                     <a href="#">Home</a>
-                    <span>Shop</span>
+                    <a href="{{url('/shop')}}"><span>Shop</span></a>
                 </div>
             </div>
         </div>

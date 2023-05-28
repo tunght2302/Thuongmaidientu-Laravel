@@ -71,7 +71,8 @@
                         <form class="variations_form" action="{{ url('/add_cart', $product->id) }}" method="POST">
                             <div class="single_variation_wrap">
                                 @csrf
-                                <button type="submit" class="button-add-to-cart" style="width: 150px;height:40px;padding: 0px;">ADD TO CART</button>
+                                <button type="submit" class="button-add-to-cart"
+                                    style="width: 150px;height:40px;padding: 0px;">ADD TO CART</button>
                                 <div class="box-qty">
                                     <input type="number" step="1" min="1" name="quantity" value="01"
                                         title="Qty" class="input-text qty text" size="4">
@@ -105,50 +106,28 @@
             <!-- Product tab -->
             <div class="product-tabs">
                 <ul class="nav-tab">
-                    <li class="active"><a data-toggle="tab" href="#tab1">DESCRITIOPN</a></li>
-                    <li><a data-toggle="tab" href="#tab2">Reviews</a></li>
-                    <li><a data-toggle="tab" href="#tab3">Product tags</a></li>
+                    <li class="active"><a data-toggle="tab" href="#tab1">Reviews</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="tab1" class="active tab-pane">
-                        <p><strong>The standard Lorem Ipsum passage, used since the 1500s</strong></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                        <p><strong>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45
-                                BC</strong></p>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-                            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                            consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
-                            dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                            exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                            consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                            molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                    </div>
-                    <div id="tab2" class="tab-pane">
                         <div class="reviews">
                             <div class="comments">
-                                <h2>CUSTOMER REVIEWS (3)</h2>
+                                <h2>CUSTOMER REVIEWS ({{$totalComments}})</h2>
                                 <ol class="commentlist">
+                                    @foreach ($comments as $items)
                                     <li class="comment">
                                         <div class="comment_container">
-                                            <img class="avatar" src="client/images/avatars/1.png" alt="" />
+                                            <div>
+                                                <img class="avatar" src="client/images/avatars/3.png" alt="" />
+                                                <span style="margin-left: 30px;color:rgb(78, 164, 206)">{{$items->name}}:</span>
+                                            </div>
+                                            
                                             <div class="comment-text">
                                                 <div itemprop="description" class="description">
-                                                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                        quae ab illo inventore veritatis et quasi architecto beatae
-                                                        vitae dicta sunt explicabo."</p>
+                                                    <p>"{{$items->content}}."</p>
                                                 </div>
                                                 <p class="meta">
-                                                    <strong itemprop="author">student</strong> – <time
-                                                        itemprop="datePublished"
-                                                        datetime="2013-06-07T12:14:53+00:00">June 7, 2013</time>:
+                                                    <time>{{$items->created_at}}</time>
                                                 </p>
                                                 <div class="product-star" title="Rated 5 out of 5">
                                                     <i class="fa fa-star"></i>
@@ -160,133 +139,34 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="comment">
-                                        <div class="comment_container">
-                                            <img class="avatar" src="client/images/avatars/2.png" alt="" />
-                                            <div class="comment-text">
-                                                <div itemprop="description" class="description">
-                                                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                        quae ab illo inventore veritatis et quasi architecto beatae
-                                                        vitae dicta sunt explicabo."</p>
-                                                </div>
-                                                <p class="meta">
-                                                    <strong itemprop="author">student</strong> – <time
-                                                        itemprop="datePublished"
-                                                        datetime="2013-06-07T12:14:53+00:00">June 7, 2013</time>:
-                                                </p>
-                                                <div class="product-star" title="Rated 5 out of 5">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="comment">
-                                        <div class="comment_container">
-                                            <img class="avatar" src="client/images/avatars/3.png" alt="" />
-                                            <div class="comment-text">
-                                                <div itemprop="description" class="description">
-                                                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                        quae ab illo inventore veritatis et quasi architecto beatae
-                                                        vitae dicta sunt explicabo."</p>
-                                                </div>
-                                                <p class="meta">
-                                                    <strong itemprop="author">student</strong> – <time
-                                                        itemprop="datePublished"
-                                                        datetime="2013-06-07T12:14:53+00:00">June 7, 2013</time>:
-                                                </p>
-                                                <div class="product-star" title="Rated 5 out of 5">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @endforeach
                                 </ol>
                             </div>
+                        </div>
+                        <div style="display: flex;justify-content: center;width: 100%;">
+                            {{ $comments->links() }}
                         </div>
                         <!-- Review form -->
                         <div class="review_form_wrapper" class="review_form_wrapper">
                             <div class="review_form">
                                 <div class="comment-respond">
-                                    <h3 class="comment-reply-title">WRITE YOUR OWN REVIEW</h3>
-                                    <div class="rating">
-                                        <div class="attribute">
-                                            <span class="title">Quality</span>
-                                            <span class="star">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                        </div>
-                                        <div class="attribute">
-                                            <span class="title">PRICE</span>
-                                            <span class="star">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                        </div>
-                                        <div class="attribute">
-                                            <span class="title">VALUE</span>
-                                            <span class="star">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <form action="#" method="post"class="comment-form">
-                                        <p class="comment-form-author">
-                                            <label for="author">Name <span class="required">*</span></label>
-                                            <input id="author" name="author" type="text" value=""
-                                                size="30" placeholder="Name">
-                                        </p>
-                                        <p class="comment-form-email">
-                                            <label for="email">Email <span class="required">*</span></label>
-                                            <input id="email" name="email" type="text" value=""
-                                                size="30" placeholder="Email">
-                                        </p>
+                                    <h3 class="comment-reply-title">WRITE YOUR COMMENT</h3>
+                                    <form action="{{ url('/comment', $product->id) }}" method="POST"
+                                        class="comment-form">
+                                        @csrf
                                         <p class="comment-form-comment">
-                                            <label for="comment">Your Review</label>
-                                            <textarea id="comment" name="comment" cols="45" rows="8" placeholder="Your Review"></textarea>
+                                            <label for="comment">Your Comment</label>
+                                            <textarea name="content" cols="45" rows="8" placeholder="Your Comment"></textarea>
                                         </p>
                                         <p class="form-submit">
-                                            <input name="submit" type="submit" id="submit" class="submit"
-                                                value="Submit">
+                                            <input type="submit" class="submit" value="Submit">
                                         </p>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        
                         <!--./review form -->
-                    </div>
-                    <div id="tab3" class="tab-pane">
-                        <div class="tagcloud">
-                            <a href="#">Cotton</a>
-                            <a href="#">Leggings</a>
-                            <a href="#">Men</a>
-                            <a href="#">Shirt</a>
-                            <a href="#">T-shirt</a>
-                            <a href="#">COSMETIC</a>
-                            <a href="#">SOFT WEAR</a>
-                            <a href="#">ACCESSORIES</a>
-                            <a href="#">LIFE STYLE</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -298,37 +178,42 @@
                 </div>
                 <div class="product-slide owl-carousel" data-dots="false" data-nav="true" data-margin="30"
                     data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
-                    @foreach($simpro as $pro)
-                    <div class="product">
-                        <div class="product-thumb">
-                            <a href="single-product.html">
-                                <img src="/upload/{{$pro->image}}" alt="">
-                            </a>
-                            <div class="product-button">
-                                <a href="#" class="button-compare">Compare</a>
-                                <a href="#" class="button-wishlist">Wishlist</a>
-                                <a href="#" class="button-quickview">Quick view</a>
+                    @foreach ($simpro as $pro)
+                        <div class="product">
+                            <div class="product-thumb">
+                                <a href="single-product.html">
+                                    <img src="/upload/{{ $pro->image }}" alt="">
+                                </a>
+                                <div class="product-button">
+                                    <a href="#" class="button-compare">Compare</a>
+                                    <a href="#" class="button-wishlist">Wishlist</a>
+                                    <a href="#" class="button-quickview">Quick view</a>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <a href="{{ url('product_detail', $pro->id) }}">
+                                    <h3>{{ $pro->title }}</h3>
+                                </a>
+                                <div style="display: flex;">
+                                    @if ($pro->discount_price != null)
+                                        <span class="product-price"
+                                            style="padding-left:50px;text-decoration-line: line-through;color:gray">{{ number_format($pro->discount_price) }}VNĐ</span>
+                                        <span class="product-price"
+                                            style="margin-left: 20px">{{ number_format($pro->price) }}VNĐ</span>
+                                    @else
+                                        <span class="product-price">
+                                            {{ number_format($pro->price) }}VNĐ</span>
+                                    @endif
+                                </div>
+                                <form action="{{ url('/add_cart', $pro->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="button-add-to-cart"
+                                        style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
+                                    <input type="number" class="button-compare" value="1" min="1"
+                                        name="quantity" style="width:40px;height:40px;border:none">
+                                </form>
                             </div>
                         </div>
-                        <div class="product-info">
-                            <a href="{{url('product_detail',$pro->id)}}"><h3>{{ $pro->title }}</h3></a>
-                            <div style="display: flex;">
-                                @if ($pro->discount_price != null)
-                                    <span class="product-price"
-                                        style="padding-left:50px;text-decoration-line: line-through;color:gray">{{ number_format($pro->discount_price) }}VNĐ</span>
-                                    <span class="product-price" style="margin-left: 20px">{{ number_format($pro->price) }}VNĐ</span>
-                                @else
-                                    <span class="product-price">
-                                        {{ number_format($pro->price) }}VNĐ</span>
-                                @endif
-                            </div>
-                            <form action="{{url('/add_cart',$pro->id)}}" method="POST">
-                                @csrf
-                                <button type="submit" class="button-add-to-cart" style="background-color: rgb(236, 232, 232);color: black">ADD TO CART</button>
-                                <input type="number" class="button-compare" value="1" min="1" name="quantity" style="width:40px;height:40px;border:none">
-                            </form>
-                        </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
