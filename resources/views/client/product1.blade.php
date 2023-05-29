@@ -14,7 +14,13 @@
         <div class="col-sm-8">
             <div class="leka-product-grid">
                 <p style="font-size: 30px">NEW PRODUCT</p>
-                
+                <div>
+                    <form action="{{url('/search_product')}}" method="GET" style="">
+                        @csrf
+                        <input type="text" name="search" style="width: 250px;height:37px">
+                        <button type="submit" style="margin: 0;padding:6px">Tìm kiếm</button>
+                    </form>
+                </div>
                 <div class="row">
                     
                     @foreach ($product as $products)

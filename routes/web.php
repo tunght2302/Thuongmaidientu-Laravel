@@ -48,7 +48,7 @@ Route::get('/update_product_view/{id}',[AdminController::class,'update_product_v
 Route::post('/update_product/{id}',[AdminController::class,'update_product']);
 Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 //Orders
-Route::get('/order',[AdminController::class,'order']);
+Route::get('/order_admin',[AdminController::class,'order_admin']);
 Route::post('/delivered/{id}',[AdminController::class,'delivered']);
 // Product Details
 Route::get('/product_detail/{id}',[HomeController::class,'product_detail']);
@@ -66,6 +66,10 @@ Route::get('/send_email/{id}',[AdminController::class,'send_email']);
 Route::post('/send_email_user/{id}',[AdminController::class,'send_email_user']);
 //Search order
 Route::get('/search',[AdminController::class,'search']);
+//Search Product
+Route::get('/search_product',[HomeController::class,'search_product']);
+//Search Product Shop
+Route::get('/search_product_shop',[HomeController::class,'search_product_shop']);
 //Order Clients
 Route::get('/order',[HomeController::class,'order']);
 Route::get('/cancel/{id}',[HomeController::class,'cancel']);

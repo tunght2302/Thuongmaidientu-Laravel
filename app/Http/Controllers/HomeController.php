@@ -21,7 +21,7 @@ class HomeController extends Controller
             return view('admin.home');
         } else {
             $product = Products::paginate(8);
-            $pro_view = Products::orderBy('view', 'DESC')->take(8)->get();
+            $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
             return view('client.index', compact('product', 'pro_view'));
         }
     }
@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         $product = Products::paginate(8);
-        $pro_view = Products::orderBy('view', 'DESC')->take(8)->get();
+        $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
         return view('client.index', compact('product', 'pro_view'));
     }
     // Trang shop
@@ -227,5 +227,25 @@ class HomeController extends Controller
         } else {
             return redirect('login');
         }
+    }
+
+    public function search_product(REQUEST $request){
+        
+        $search_product = $request->search;
+        $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
+        $product = Products::where('title','LIKE',"%$search_product%")->paginate(8);
+
+        return view('client.index',compact('product','pro_view'));
+
+    }
+
+    public function search_product_shop(REQUEST $request){
+        
+        $search_product = $request->search;
+        $categories = Categories::all();
+        $product = Products::where('title','LIKE',"%$search_product%")->paginate(8);
+
+        return view('client.shop',compact('product','categories'));
+
     }
 }

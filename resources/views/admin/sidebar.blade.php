@@ -81,7 +81,7 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="{{url('order')}}">
+        <a class="nav-link" href="{{url('order_admin')}}">
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>

@@ -30,22 +30,22 @@
                                 <div class="form-group">
                                     <label for="exampleInputName1">Title</label>
                                     <input type="text" class="form-control bg-light text-dark" name="title"
-                                        placeholder="Title">
+                                        placeholder="Title" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Description</label>
                                     <input type="text" class="form-control bg-light text-dark" name="description"
-                                        placeholder="description">
+                                        placeholder="description" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Quantity</label>
                                     <input type="number" min="0" name="quantity"
-                                        class="form-control bg-light text-dark" placeholder="Quantity">
+                                        class="form-control bg-light text-dark" placeholder="Quantity" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Price</label>
                                     <input type="number" name="price" class="form-control bg-light text-dark"
-                                        placeholder="Price">
+                                        placeholder="Price" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleSelectGender">Category</label>
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputCity1">Discount_price</label>
                                     <input type="text" name="dis_price" class="form-control bg-light text-dark"
-                                        placeholder="Discount_price">
+                                        placeholder="Discount_price" required>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>

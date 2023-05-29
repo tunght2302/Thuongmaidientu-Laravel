@@ -55,6 +55,13 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <form action="{{url('/search_product_shop')}}" method="GET">
+                            @csrf
+                            <input type="text" name="search" style="width: 250px;height:40px">
+                            <button type="submit" style="margin: 0;padding:6px">Tìm kiếm</button>
+                        </form>
+                    </div>
                     <!-- ./ SortBar -->
                     <!-- List products -->
                     <ul class="products row">
