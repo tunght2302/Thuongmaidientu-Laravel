@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!-- Mirrored from html.kutethemes.com/leka/html/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 May 2023 03:03:18 GMT -->
-
-<head>
-    @include('client.css')
-</head>
-
-<body class="home">
-    <header class="header header-style3">
-        @include('client.header')
-    </header>
+@extends('client.layout.app')
+@section('content')
     <section class="banner banner-cart bg-parallax">
         <div class="overlay"></div>
         <div class="container">
@@ -70,7 +59,7 @@
                                 @if($items->delivery_status == 'Chờ xử lý')
                                 <td class="product-remove">
                                     <a class="remove btn btn-success" onclick="return confirm('Are you sure to cancel the order?')"
-                                        href="{{url('cancel',$items->id)}}">
+                                           href="{{url('cancel',$items->id)}}">
                                         Huỷ đơn
                                     </a>
                                 </td>
@@ -82,19 +71,8 @@
                             </tr>
                         @endforeach
                     </form>
-                    
                 </tbody>
             </table>
         </div>
     </div>
-
-    <div class="section-shopbrand section-shopbrand3 bg-parallax">
-        @include('client.shop-brand')
-    </div>
-    <footer class="footer">
-        @include('client.footer')
-    </footer>
-    @include('client.js')
-</body>
-
-</html>
+@endsection

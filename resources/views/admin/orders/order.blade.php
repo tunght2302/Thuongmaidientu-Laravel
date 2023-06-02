@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('admin.css')
-</head>
-
-<body>
-    <div class="container-scroller">
-        <!-- partial:partials/_sidebar.html -->
-        @include('admin.sidebar')
-        <!-- partial -->
-        @include('admin.header')
-        <!-- partial -->
+@extends('admin.layout.app')
+@section('content')
         <div class="main-panel">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                       
                         <h4 style="color: red;text-align: center;font-size: 30px;font:bold">ALL ORDER</h4>
                         <div style="width: 300px;">
                             <form action="{{url('/search')}}" method="GET" style="display: flex">
@@ -87,8 +74,4 @@
             </div>
         </div>
         <!-- container-scroller -->
-    </div>
-    @include('admin.js')
-</body>
-
-</html>
+@endsection

@@ -130,7 +130,6 @@ class HomeController extends Controller
 
             if ($cart) {
                 $cart->quantity = $cartItemData['quantity'];
-                // Cập nhật các trường thông tin khác của giỏ hàng nếu cần
                 $cart->save();
             }
         }

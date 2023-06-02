@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-        @include('admin.css')
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-        @include('admin.sidebar')
-      <!-- partial -->
-        @include('admin.header')
-        <!-- partial -->
+@extends('admin.layout.app')
+@section('content')
         <div class="main-panel">
             <div class="content-wrapper">
                 @if (session()->has('message'))
@@ -80,7 +70,4 @@
                 </div>
             </div>
         </div>
-    <!-- container-scroller -->
-        @include('admin.js')
-  </body>
-</html>
+@endsection
