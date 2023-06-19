@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use App\Models\User;
+
 use App\Models\Products;
 use App\Models\Categories;
 use App\Models\Carts;
@@ -58,11 +58,7 @@ class HomeController extends Controller
     public function product_by_category($category_name)
     {
         $categories = Categories::all();
-        //lấy ra đối tượng danh mục với tên được chỉ định bằng ($category_name) thông qua câu truy vấn.
-        // Nếu không tìm thấy danh mục tương ứng, phương thức firstOrFail() sẽ gây ra một ngoại lệ.
         $category = Categories::where('category_name', $category_name)->firstOrFail();
-        //Tìm tất cả các sản phẩm có trường category bằng với (category_name) của danh mục đã được tìm thấy ở dòng trước đó.
-        //Các sản phẩm tương ứng được lấy ra thông qua phương thức get() và gán vào biến $products.
         $products = Products::where('category', '=', $category->category_name)->paginate(9);
         return view('client.product_by_category', compact('categories', 'category', 'products'));
     }
@@ -84,10 +80,6 @@ class HomeController extends Controller
                 // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào
                 $cart = new Carts;
                 $cart->user_id = $user->id;
-                $cart->name = $user->name;
-                $cart->email = $user->email;
-                $cart->phone = $user->phone;
-                $cart->address = $user->address;
 
                 $cart->product_id = $product->id;
                 $cart->product_title = $product->title;
@@ -152,29 +144,34 @@ class HomeController extends Controller
         return view('client.checkout', compact('data', 'data_cart'));
     }
 
-    public function cash_order()
+    public function cash_order(REQUEST $request)
     {
         $id = Auth::user()->id;
         $data_order = Carts::where('user_id', '=', $id)->get();
-        foreach ($data_order as $data_order) {
+        foreach ($data_order as $orders) {
             $order = new Orders;
 
-            $order->name = $data_order->name;
-            $order->email = $data_order->email;
-            $order->phone = $data_order->phone;
-            $order->address = $data_order->address;
-            $order->user_id = $data_order->user_id;
+            $order->name = $request->name;
+            $order->email = $request->email;
+            $order->phone = $request->phone;
+            $order->address = $request->address;
+            $order->user_id = $orders->user_id;
 
-            $order->product_title = $data_order->product_title;
-            $order->quantity = $data_order->quantity;
-            $order->price = $data_order->price;
-            $order->image = $data_order->image;
-            $order->product_id = $data_order->product_id;
+            $order->product_title = $orders->product_title;
+            $order->quantity = $orders->quantity;
+            $order->price = $orders->price;
+            $order->image = $orders->image;
+            $order->product_id = $orders->product_id;
+
+            $total = 0;
+            $subtotal = $orders->quantity * $orders->price;
+            $total += $subtotal;
+            $order->total = $total;
 
             $order->payment_status = 'Cash on delivery';
             $order->delivery_status = 'Chờ xử lý';
 
-            $cart_id = $data_order->id;
+            $cart_id = $orders->id;
             $delete_cart = Carts::find($cart_id);
 
             $delete_cart->delete();
@@ -228,23 +225,24 @@ class HomeController extends Controller
         }
     }
 
-    public function search_product(REQUEST $request){
-        
+    public function search_product(REQUEST $request)
+    {
+
         $search_product = $request->search;
         $pro_view = Products::orderBy('view', 'desc')->take(8)->get();
-        $product = Products::where('title','LIKE',"%$search_product%")->paginate(8);
+        $product = Products::where('title', 'LIKE', "%$search_product%")->paginate(8);
 
-        return view('client.index',compact('product','pro_view'));
-
+        return view('client.index', compact('product', 'pro_view'));
     }
 
-    public function search_product_shop(REQUEST $request){
-        
+    public function search_product_shop(REQUEST $request)
+    {
+
         $search_product = $request->search;
         $categories = Categories::all();
-        $product = Products::where('title','LIKE',"%$search_product%")->paginate(8);
+        $product = Products::where('title', 'LIKE', "%$search_product%")->paginate(8);
 
-        return view('client.shop',compact('product','categories'));
-
+        return view('client.shop', compact('product', 'categories'));
     }
+    
 }

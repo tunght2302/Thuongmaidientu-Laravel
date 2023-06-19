@@ -135,15 +135,6 @@
                     </div>
                     <!-- ./Filter color -->
                     <!-- Filter price -->
-                    <div class="widget widget_price_filter">
-                        <h2 class="widget-title">BY PRICES</h2>
-                        <div class="price_slider_wrapper">
-                            <div class="amount-range-price">$50 - $350</div>
-                            <div data-label-reasult="" data-min="0" data-max="500" data-unit="$"
-                                class="slider-range-price" data-value-min="50" data-value-max="350"></div>
-                            <button class="button">Filter</button>
-                        </div>
-                    </div>
                     <!-- ./Filter price -->
 
                     <!-- Compare products -->

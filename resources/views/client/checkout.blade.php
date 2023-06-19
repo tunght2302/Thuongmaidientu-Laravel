@@ -45,117 +45,117 @@
             </div>
             <!-- ./Step Checkout-->
             <div class="checkout-page">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form">
-                            <h3 class="form-title">BILLING DETAILS</h3>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <p>
-                                        <label>LAST NAME <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->name }}" name="name" disabled />
-                                    </p>
+                <form action="{{ url('/cash_order') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form">
+                                <h3 class="form-title">BILLING DETAILS</h3>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>
+                                            <label>LAST NAME <span class="required">*</span></label>
+                                            <input type="text" value="{{ $data->name }}" name="name" />
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p>
-                                        <label>Email <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->email }}" name="email" disabled />
-                                    </p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Email <span class="required">*</span></label>
+                                            <input type="text" value="{{ $data->email }}" name="email" />
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Phone <span class="required">*</span></label>
+                                            <input type="text" value="{{ $data->phone }}" name="phone" />
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p>
-                                        <label>Phone <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->phone }}" name="phone" disabled />
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <p>
-                                        <label>Address <span class="required">*</span></label>
-                                        <input type="text" value="{{ $data->address }}" name="address" disabled />
-                                    </p>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>
+                                            <label>Address <span class="required">*</span></label>
+                                            <input type="text" value="{{ $data->address }}" name="address" />
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @if (session('success_message'))
-                        <script>
-                            Swal.fire({
-                                title: 'Thành công',
-                                text: '{{ session('success_message') }}',
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            });
-                        </script>
-                    @endif
-                    <div class="col-sm-12 col-md-6">
-                        <h3 class="form-title">YOUR ODERS</h3>
-                        <div class="order-review">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Product name</td>
-                                        <td>Quantity</td>
-                                        <td>Price</td>
-                                        <td>Sub total</td>
-                                    </tr>
-                                    <?php $total = 0; ?>
-                                    @foreach ($data_cart as $cart)
-                                        <?php $sub_total = $cart->quantity * $cart->price; ?>
-                                        <?php $total += $sub_total; ?>
+                        @if (session('success_message'))
+                            <script>
+                                Swal.fire({
+                                    title: 'Thành công',
+                                    text: '{{ session('success_message') }}',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                });
+                            </script>
+                        @endif
+                        <div class="col-sm-12 col-md-6">
+                            <h3 class="form-title">YOUR ODERS</h3>
+                            <div class="order-review">
+                                <table>
+                                    <tbody>
                                         <tr>
-                                            <td>{{ $cart->product_title }}</td>
-                                            <td>{{ $cart->quantity }}</td>
-                                            <td>{{ number_format($cart->price) }} VNĐ</td>
-                                            <td><span class="amount">{{ number_format($sub_total) }} VNĐ</span></td>
+                                            <td>Product name</td>
+                                            <td>Quantity</td>
+                                            <td>Price</td>
+                                            <td>Sub total</td>
                                         </tr>
-                                    @endforeach
-                                    <tr>
-                                        <td colspan="2">SHIPPING & HANDLING</td>
-                                        <td>
-                                            FREE SHIPPING
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">ORDER TOTAL</td>
-                                        <td>
-                                            <span class="amount">{{ number_format($total) }} VNĐ</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        {{  $total = 0 }}
+                                        @foreach ($data_cart as $cart)
+                                            {{  $sub_total = $cart->quantity * $cart->price }}
+                                            {{  $total += $sub_total }}
+                                            <tr>
+                                                <td>{{ $cart->product_title }}</td>
+                                                <td>{{ $cart->quantity }}</td>
+                                                <td>{{ number_format($cart->price) }} VNĐ</td>
+                                                <td><span class="amount">{{ number_format($sub_total) }} VNĐ</span></td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="2">SHIPPING & HANDLING</td>
+                                            <td>
+                                                FREE SHIPPING
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">ORDER TOTAL</td>
+                                            <td>
+                                                <span class="amount">{{ number_format($total) }} VNĐ</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="paymment-method">
+                                <h3 class="form-title">PAYMENT METHOD</h3>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        SHIP TO BILLING ADDRESS ?
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        PAYPAL
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        I’VE READ AND ACCEPT THE TEMR & CONDITIONS
+                                    </label>
+                                </div>
+                            </div>
+                                <button style="submit" class="button pull-right">PLACE ODER NOW</button>
                         </div>
-                        <div class="paymment-method">
-                            <h3 class="form-title">PAYMENT METHOD</h3>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    SHIP TO BILLING ADDRESS ?
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    PAYPAL
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    I’VE READ AND ACCEPT THE TEMR & CONDITIONS
-                                </label>
-                            </div>
-                        </div>
-                        <a href="{{ url('cash_order') }}">
-                            <button  class="button pull-right">PLACE ODER NOW</button>
-                        </a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
 @endsection

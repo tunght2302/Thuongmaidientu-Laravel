@@ -60,7 +60,7 @@ Route::get('/show_cart',[HomeController::class,'show_cart']); // Show cart
 Route::post('/update_cart',[HomeController::class,'update_cart']); // Show cart
 Route::get('/delete_cart/{id}',[HomeController::class,'delete_cart']); // Delete products in cart
 Route::get('/cart_destroy',[HomeController::class,'cart_destroy']); // Delete products in cart
-Route::get('/cash_order',[HomeController::class,'cash_order']); // Cash order
+Route::post('/cash_order',[HomeController::class,'cash_order']); // Cash order
 //Send Email
 Route::get('/send_email/{id}',[AdminController::class,'send_email']);
 Route::post('/send_email_user/{id}',[AdminController::class,'send_email_user']);

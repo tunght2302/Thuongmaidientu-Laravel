@@ -21,6 +21,9 @@
                                         name="category" placeholder="NameCategory"
                                         value="{{ $category->category_name }}">
                                 </div>
+                                @error('category')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror <br>
                                 <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                 <a class="btn btn-primary mr-2" href="{{ url('/view_category') }}">List Category</a>
                                 <button class="btn btn-dark">Cancel</button>

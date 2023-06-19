@@ -23,6 +23,7 @@
                                         <th class="text-dark"> Image </th>
                                         <th class="text-dark"> Quantity </th>
                                         <th class="text-dark"> Price </th>
+                                        <th class="text-dark"> Total </th>
                                         <th class="text-dark"> Payment Status </th>
                                         <th class="text-dark"> Delivery Status </th>
                                         <th> Send Email </th>
@@ -43,6 +44,7 @@
                                             </td>
                                             <td>{{ $order->quantity }} </td>
                                             <td>{{ number_format($order->price) }} VNĐ</td>
+                                            <td>{{ number_format($order->total) }} VNĐ</td>
                                             <td>{{ $order->payment_status }}</td>
                                             <form action="{{url('delivered',$order->id)}}" method="POST">
                                                 @csrf

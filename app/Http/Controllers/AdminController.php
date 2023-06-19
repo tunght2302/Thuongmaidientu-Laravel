@@ -29,7 +29,14 @@ class AdminController extends Controller
     // Add category
     public function add_category(REQUEST $request)
     {
-
+        $rules = [
+            'category' => 'required | regex:/^[\pL\pM\s]+$/u',
+        ];
+        $message = [
+            'category.required' =>'Không được bỏ trống',
+            'category.regex' => 'Tên danh mục phải nhập chữ',
+        ];
+        $request->validate($rules,$message);
         $data = new Categories();
         $data->category_name = $request->category;
 
@@ -53,6 +60,14 @@ class AdminController extends Controller
 
     public function update_category(REQUEST $request, $id)
     {
+        $rules = [
+            'category' => 'required | regex:/^[\pL\pM\s]+$/u',
+        ];
+        $message = [
+            'category.required' =>'Không được bỏ trống',
+            'category.regex' => 'Tên danh mục phải nhập chữ',
+        ];
+        $request->validate($rules,$message);
         if (Auth::id()) {
             if (Auth::user()->usertype == '1') {
                 $category = Categories::find($id);
@@ -94,6 +109,24 @@ class AdminController extends Controller
     // Add Product
     public function add_product(REQUEST $request)
     {
+        $rules = [
+            'title' => 'required | regex:/^[\pL\pM\s]+$/u',
+            'description' => 'required | min:10 | max:255',
+            'quantity' => 'required | numeric ',
+            'price' => 'required | numeric',
+            'category' => 'required',
+            'dis_price' => 'required | numeric',
+            'image' => 'image',
+        ];
+        $message = [
+            'required' =>'Không được bỏ trống',
+            'regex' =>'Không được nhập số',
+            'min' => 'Không được nhỏ hơn 10 ký tự',
+            'max' => 'Không được nhập quá 255 ký tự',
+            'numeric' => 'Không được nhập chữ',
+            'image' => 'Ảnh không hợp lệ',
+        ];
+        $request->validate($rules,$message);
         if (Auth::id()) {
             if (Auth::user()->usertype == '1') {
                 $product = new Products();
@@ -106,13 +139,13 @@ class AdminController extends Controller
 
                 $image = $request->image; // lấy đối tượng ảnh từ request được gửi lên.
                 if ($image) {
-                    $imagename = time() . '.' . $image->getClientOriginalExtension(); // tạo tên file mới cho ảnh dựa trên thời gian hiện tại và phần mở rộng của file gốc. 
-                    $request->image->move('upload', $imagename); // di chuyển ảnh gốc đến thư mục 'upload' trên server với tên file mới vừa được tạo ở trên.
+                    $imagename = time() . '.' . $image->getClientOriginalExtension();
+                    $request->image->move('upload', $imagename);
 
-                    $product->image = $imagename; //cập nhật tên file ảnh mới vào trường 'image' của đối tượng sản phẩm ($product).
+                    $product->image = $imagename; 
                 }
-                $product->save(); // lưu thông tin sản phẩm đã được cập nhật vào cơ sở dữ liệu.
-                return redirect()->back()->with('message', 'Product added successfully'); // trả về trang trước đó, tức là trang hiển thị thông tin sản phẩm vừa được chỉnh sửa.
+                $product->save();
+                return redirect()->back()->with('message', 'Product added successfully');
             } else {
                 return view('404');
             }
@@ -137,6 +170,7 @@ class AdminController extends Controller
     // Update Product View
     public function update_product_view($id)
     {
+        
         if (Auth::id()) {
             if (Auth::user()->usertype == '1') {
                 $product = Products::find($id);
@@ -152,6 +186,24 @@ class AdminController extends Controller
     }
     public function update_product(REQUEST $request, $id)
     {
+        $rules = [
+            'title' => 'required | regex:/^[\pL\pM\s]+$/u',
+            'description' => 'required | min:10 | max:255',
+            'quantity' => 'required | numeric ',
+            'price' => 'required | numeric',
+            'category' => 'required',
+            'dis_price' => 'required | numeric',
+            'image' => 'image',
+        ];
+        $message = [
+            'required' =>'Không được bỏ trống',
+            'regex' =>'Không được nhập số',
+            'min' => 'Không được nhỏ hơn 10 ký tự',
+            'max' => 'Không được nhập quá 255 ký tự',
+            'numeric' => 'Không được nhập chữ',
+            'image' => 'Ảnh không hợp lệ',
+        ];
+        $request->validate($rules,$message);
         if (Auth::id()) {
             if (Auth::user()->usertype == '1') {
                 $product = Products::find($id);
