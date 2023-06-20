@@ -138,10 +138,14 @@ class HomeController extends Controller
     // Check out
     public function check_out()
     {
-        $data = Auth::user();
-        $id = Auth::user()->id;
-        $data_cart = Carts::where('user_id', '=', $id)->get();
-        return view('client.checkout', compact('data', 'data_cart'));
+        if (Auth::id()) {
+            $data = Auth::user();
+            $id = Auth::user()->id;
+            $data_cart = Carts::where('user_id', '=', $id)->get();
+            return view('client.checkout', compact('data', 'data_cart'));
+        } else {
+            return redirect('login');
+        }
     }
 
     public function cash_order(REQUEST $request)
@@ -244,5 +248,4 @@ class HomeController extends Controller
 
         return view('client.shop', compact('product', 'categories'));
     }
-    
 }

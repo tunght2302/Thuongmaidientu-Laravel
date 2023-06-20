@@ -8,23 +8,15 @@ use App\Models\Products;
 use App\Models\Orders;
 use App\Notifications\SendEmailNotifiCation;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     // Trang view
     public function view_category()
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $data = Categories::all();
-                return view('admin.categories.category', compact('data'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+        $data = Categories::all();
+        return view('admin.categories.category', compact('data'));
     }
     // Add category
     public function add_category(REQUEST $request)
@@ -33,10 +25,10 @@ class AdminController extends Controller
             'category' => 'required | regex:/^[\pL\pM\s]+$/u',
         ];
         $message = [
-            'category.required' =>'Không được bỏ trống',
+            'category.required' => 'Không được bỏ trống',
             'category.regex' => 'Tên danh mục phải nhập chữ',
         ];
-        $request->validate($rules,$message);
+        $request->validate($rules, $message);
         $data = new Categories();
         $data->category_name = $request->category;
 
@@ -46,16 +38,10 @@ class AdminController extends Controller
     // Update category
     public function update_category_view($id)
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $category = Categories::find($id);
-                return view('admin.categories.update_category', compact('category'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+
+        $category = Categories::find($id);
+        return view('admin.categories.update_category', compact('category'));
     }
 
     public function update_category(REQUEST $request, $id)
@@ -64,24 +50,17 @@ class AdminController extends Controller
             'category' => 'required | regex:/^[\pL\pM\s]+$/u',
         ];
         $message = [
-            'category.required' =>'Không được bỏ trống',
+            'category.required' => 'Không được bỏ trống',
             'category.regex' => 'Tên danh mục phải nhập chữ',
         ];
-        $request->validate($rules,$message);
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $category = Categories::find($id);
+        $request->validate($rules, $message);
 
-                $category->category_name = $request->category;
+        $category = Categories::find($id);
 
-                $category->save();
-                return redirect()->back()->with('message', 'Category Updated Successfully');
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+        $category->category_name = $request->category;
+
+        $category->save();
+        return redirect()->back()->with('message', 'Category Updated Successfully');
     }
     // Delete category
     public function delete_category($id)
@@ -95,16 +74,9 @@ class AdminController extends Controller
     // View product
     public function view_product()
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $category = Categories::all();
-                return view('admin.products.product', compact('category'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+        $category = Categories::all();
+        return view('admin.products.product', compact('category'));
     }
     // Add Product
     public function add_product(REQUEST $request)
@@ -119,70 +91,48 @@ class AdminController extends Controller
             'image' => 'image',
         ];
         $message = [
-            'required' =>'Không được bỏ trống',
-            'regex' =>'Không được nhập số',
+            'required' => 'Không được bỏ trống',
+            'regex' => 'Không được nhập số',
             'min' => 'Không được nhỏ hơn 10 ký tự',
             'max' => 'Không được nhập quá 255 ký tự',
             'numeric' => 'Không được nhập chữ',
             'image' => 'Ảnh không hợp lệ',
         ];
-        $request->validate($rules,$message);
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $product = new Products();
-                $product->title = $request->title;
-                $product->description = $request->description;
-                $product->quantity = $request->quantity;
-                $product->price = $request->price;
-                $product->category = $request->category;
-                $product->discount_price = $request->dis_price;
+        $request->validate($rules, $message);
 
-                $image = $request->image; // lấy đối tượng ảnh từ request được gửi lên.
-                if ($image) {
-                    $imagename = time() . '.' . $image->getClientOriginalExtension();
-                    $request->image->move('upload', $imagename);
+        $product = new Products();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->category = $request->category;
+        $product->discount_price = $request->dis_price;
 
-                    $product->image = $imagename; 
-                }
-                $product->save();
-                return redirect()->back()->with('message', 'Product added successfully');
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
+        $image = $request->image; // lấy đối tượng ảnh từ request được gửi lên.
+        if ($image) {
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $request->image->move('upload', $imagename);
+
+            $product->image = $imagename;
         }
+        $product->save();
+        return redirect()->back()->with('message', 'Product added successfully');
     }
     // List Product
     public function list_product()
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $products = Products::all();
-                return view('admin.products.list_product', compact('products'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+        $products = Products::all();
+        return view('admin.products.list_product', compact('products'));
     }
     // Update Product View
     public function update_product_view($id)
     {
-        
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $product = Products::find($id);
-                $category = Categories::all();
 
-                return view('admin.products.update_product', compact('product', 'category'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+        $product = Products::find($id);
+        $category = Categories::all();
+
+        return view('admin.products.update_product', compact('product', 'category'));
     }
     public function update_product(REQUEST $request, $id)
     {
@@ -196,40 +146,33 @@ class AdminController extends Controller
             'image' => 'image',
         ];
         $message = [
-            'required' =>'Không được bỏ trống',
-            'regex' =>'Không được nhập số',
+            'required' => 'Không được bỏ trống',
+            'regex' => 'Không được nhập số',
             'min' => 'Không được nhỏ hơn 10 ký tự',
             'max' => 'Không được nhập quá 255 ký tự',
             'numeric' => 'Không được nhập chữ',
             'image' => 'Ảnh không hợp lệ',
         ];
-        $request->validate($rules,$message);
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $product = Products::find($id);
+        $request->validate($rules, $message);
 
-                $product->title = $request->title;
-                $product->description = $request->description;
-                $product->quantity = $request->quantity;
-                $product->price = $request->price;
-                $product->category = $request->category;
-                $product->discount_price = $request->dis_price;
+        $product = Products::find($id);
 
-                $image = $request->image;
-                if ($image) {
-                    $imagename = time() . '.' . $image->getClientOriginalExtension();
-                    $request->image->move('upload', $imagename);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->category = $request->category;
+        $product->discount_price = $request->dis_price;
 
-                    $product->image = $imagename;
-                }
-                $product->save();
-                return redirect()->back()->with('message', 'Product updated successfully');
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
+        $image = $request->image;
+        if ($image) {
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $request->image->move('upload', $imagename);
+
+            $product->image = $imagename;
         }
+        $product->save();
+        return redirect()->back()->with('message', 'Product updated successfully');
     }
     // Delete Product
     public function delete_product($id)
@@ -242,16 +185,9 @@ class AdminController extends Controller
 
     public function order_admin()
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $all_order = Orders::all();
-                return view('admin.orders.order', compact('all_order'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+        $all_order = Orders::all();
+        return view('admin.orders.order', compact('all_order'));
     }
     // Update trạng thái đơn hàng
     public function delivered(REQUEST $request, $id)
@@ -265,16 +201,9 @@ class AdminController extends Controller
     // Gửi mail cho khách hàng
     public function send_email($id)
     {
-        if (Auth::id()) {
-            if (Auth::user()->usertype == '1') {
-                $send_email = Orders::find($id);
-                return view('admin.orders.send_email', compact('send_email'));
-            } else {
-                return view('404');
-            }
-        } else {
-            return redirect('login');
-        }
+
+        $send_email = Orders::find($id);
+        return view('admin.orders.send_email', compact('send_email'));
     }
 
     public function send_email_user(REQUEST $request, $id)
