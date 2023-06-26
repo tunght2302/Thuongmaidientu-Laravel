@@ -25,18 +25,19 @@ class User extends Authenticatable implements MustVerifyEmail
      */
 
     /**
-     * 
+     *
      * Laravel sẽ chỉ lưu trữ các giá trị được chỉ định trong mảng $fillable của model.
      * Các trường dữ liệu không nằm trong danh sách $fillable sẽ bị bỏ qua và không được lưu trữ trong cơ sở dữ liệu.
-     * Việc sử dụng thuộc tính $fillable giúp bảo vệ các trường dữ liệu không mong muốn khỏi việc bị ghi đè bởi các 
+     * Việc sử dụng thuộc tính $fillable giúp bảo vệ các trường dữ liệu không mong muốn khỏi việc bị ghi đè bởi các
      * giá trị không mong muốn từ người dùng hoặc các yêu cầu bất hợp lệ.
      */
     protected $fillable = [
-        'name',                                   
+        'name',
         'email',
         'phone',
         'address',
         'password',
+        'google_id',
     ];
 
     /**

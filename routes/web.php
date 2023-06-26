@@ -79,3 +79,6 @@ Route::get('/order', [HomeController::class, 'order']);
 Route::get('/cancel/{id}', [HomeController::class, 'cancel']);
 //Comment
 Route::post('/comment/{id}', [HomeController::class, 'comment']);
+// Login Google
+Route::get('auth/google', [HomeController::class,'googlepage']);
+Route::get('auth/google/callback', [HomeController::class,'googlecallback']);

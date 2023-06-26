@@ -43,6 +43,13 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+
+            <div>
+                <a href="{{ url('auth/google') }}" style="display: flex;">
+                    <img src="{{ asset('client/images/search.png') }}" alt="Lỗi" style="width:20px;height: 20px;">
+                    <p style="margin-left: 10px;">Login Google</p>
+                </a>
+            </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>

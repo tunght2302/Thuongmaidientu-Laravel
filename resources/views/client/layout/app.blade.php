@@ -5,7 +5,6 @@
 
 <head>
     @include('client.layout.css')
-    @livewireStyles
 </head>
 
 <body class="home">
@@ -20,8 +19,6 @@
         @include('client.layout.footer')
     </footer>
     @include('client.layout.js')
-    @livewireScripts
-    @stack('scripts')
 </body>
 
 </html>

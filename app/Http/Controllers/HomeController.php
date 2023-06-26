@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
-
+use App\Models\User;
 use App\Models\Products;
 use App\Models\Categories;
 use App\Models\Carts;
 use App\Models\Orders;
 use App\Models\Comments;
+
+use Exception;
 
 class HomeController extends Controller
 {
@@ -247,5 +250,40 @@ class HomeController extends Controller
         $product = Products::where('title', 'LIKE', "%$search_product%")->paginate(8);
 
         return view('client.shop', compact('product', 'categories'));
+    }
+
+    public function googlepage()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googlecallback()
+    {
+        try {
+
+            $user = Socialite::driver('google')->user();
+
+            $finduser = User::where('google_id', $user->id)->first();
+
+            if ($finduser) {
+
+                Auth::login($finduser);
+
+                return redirect()->intended('/');
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id' => $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+
+                Auth::login($newUser);
+
+                return redirect()->intended('/');
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }
