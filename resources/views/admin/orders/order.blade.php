@@ -26,11 +26,11 @@
                                         <th class="text-dark"> Total </th>
                                         <th class="text-dark"> Payment Status </th>
                                         <th class="text-dark"> Delivery Status </th>
-                                        <th> Send Email </th>
+                                        {{-- <th> Send Email </th> --}}
                                     </tr>
                                 </thead>
                                 @forelse ($all_order as $order)
-                                    
+
                                     <tbody>
                                         <tr>
                                             <td >{{ $order->name }} </td>
@@ -59,9 +59,9 @@
                                                     <button type="submit" class="btn btn-info">Update</button>
                                                 </td>
                                             </form>
-                                            <td>
+                                            {{-- <td>
                                                 <a class="btn btn-success" href="{{url('send_email',$order->id)}}">Send Email</a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     </tbody>
                                     @empty

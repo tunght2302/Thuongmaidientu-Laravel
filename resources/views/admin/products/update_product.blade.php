@@ -22,8 +22,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Description</label>
-                                    <input type="text" class="form-control bg-light text-dark" name="description"
-                                        placeholder="description" value="{{$product->description}}">
+                                    {{-- <input type="text" class="form-control bg-light text-dark" name="description" --}}
+                                        {{-- placeholder="description" value="{{$product->description}}"> --}}
+                                    <textarea name="description" class="form-control bg-light text-dark" cols="30" rows="10" placeholder="description">{{$product->description}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Quantity</label>
@@ -37,7 +38,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleSelectGender">Category</label>
-                                    
+
                                     <select class="form-control bg-light text-dark" name="category">
                                         <option value="{{ $product->category }}">
                                             {{ $product->category }}

@@ -25,8 +25,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Description</label>
-                                <input type="text" class="form-control bg-light text-dark" name="description"
-                                    placeholder="description">
+                                <textarea name="description" class="form-control bg-light text-dark" cols="30" rows="10" placeholder="Description"></textarea>
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror <br>

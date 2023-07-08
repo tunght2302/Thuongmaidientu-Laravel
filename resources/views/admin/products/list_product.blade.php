@@ -13,7 +13,7 @@
                     <h4 style="color: red;text-align: center;font-size: 30px;font:bold">LIST PRODUCT</h4>
                     </p>
                     <div class="table-responsive mt-3">
-                        <table class="table table-dark">
+                        <table class="table table-bordered">
                             <thead class="bg-light">
                                 <tr>
                                     <th class="text-dark"> Title </th>
@@ -24,7 +24,7 @@
                                     <th class="text-dark"> Quantity </th>
                                     <th class="text-dark"> Discount_price </th>
                                     <th></th>
-                                    <th></th>
+                                    {{-- <th></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,11 +34,11 @@
                                         <td> {{ $product->description }} </td>
                                         <td> {{ $product->category }} </td>
                                         <td>
-                                            <img style="width: 130px;height: 100px" src="/upload/{{ $product->image }}">
+                                            <img style="width:50px;height:auto" src="/upload/{{ $product->image }}">
                                         </td>
-                                        <td> {{ $product->price }} </td>
+                                        <td> {{ number_format($product->price)  }} VNĐ </td>
                                         <td> {{ $product->quantity }} </td>
-                                        <td> {{ $product->discount_price }} </td>
+                                        <td> {{ number_format($product->discount_price) }} VNĐ </td>
                                         <td>
                                             <a href="{{ url('/update_product_view', $product->id) }}">
                                                 <button class="btn btn-info">Edit</button>

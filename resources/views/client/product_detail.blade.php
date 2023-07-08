@@ -19,16 +19,6 @@
                     <div class="single-images">
                         <a class="popup-image" href=""><img class="main-image"
                                 src="/upload/{{ $product->image }}" alt="" /></a>
-                        <div class="single-product-thumbnails">
-                            <span data-image_full="client/images/products/product-full1.jpg"><img
-                                    src="client/images/products/p-thumb1.jpg" /></span>
-                            <span data-image_full="client/images/products/product-full2.jpg"><img
-                                    src="client/images/products/p-thumb2.jpg" /></span>
-                            <span class="selected" data-image_full="client/images/products/product-full3.jpg"><img
-                                    src="client/images/products/p-thumb3.jpg" /></span>
-                            <span data-image_full="client/images/products/product-full4.jpg"><img
-                                    src="client/images/products/p-thumb4.jpg" /></span>
-                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -106,10 +96,10 @@
                                     <li class="comment">
                                         <div class="comment_container">
                                             <div>
-                                                <img class="avatar" src="client/images/avatars/3.png" alt="" />
+                                                <img class="avatar" src="{{ asset('client/images/avatars/3.png') }}" alt="" />
                                                 <span style="margin-left: 30px;color:rgb(78, 164, 206)">{{$items->name}}:</span>
                                             </div>
-                                            
+
                                             <div class="comment-text">
                                                 <div itemprop="description" class="description">
                                                     <p>"{{$items->content}}."</p>
@@ -153,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!--./review form -->
                     </div>
                 </div>
@@ -175,7 +165,7 @@
                                 <div class="product-button">
                                     <a href="#" class="button-compare">Compare</a>
                                     <a href="#" class="button-wishlist">Wishlist</a>
-                                    <a href="#" class="button-quickview">Quick view</a>
+                                    <a href="{{ url('product_detail',$pro->id) }}" class="button-quickview">Quick view</a>
                                 </div>
                             </div>
                             <div class="product-info">

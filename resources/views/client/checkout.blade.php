@@ -134,8 +134,8 @@
                                 <h3 class="form-title">PAYMENT METHOD</h3>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="">
-                                        SHIP TO BILLING ADDRESS ?
+                                        <input type="checkbox" value="" checked>
+                                        Payment on delivery
                                     </label>
                                 </div>
                                 <div class="checkbox">

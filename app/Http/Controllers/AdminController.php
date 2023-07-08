@@ -14,7 +14,6 @@ class AdminController extends Controller
     // Trang view
     public function view_category()
     {
-
         $data = Categories::all();
         return view('admin.categories.category', compact('data'));
     }
@@ -38,8 +37,6 @@ class AdminController extends Controller
     // Update category
     public function update_category_view($id)
     {
-
-
         $category = Categories::find($id);
         return view('admin.categories.update_category', compact('category'));
     }
@@ -101,6 +98,7 @@ class AdminController extends Controller
         $request->validate($rules, $message);
 
         $product = new Products();
+        
         $product->title = $request->title;
         $product->description = $request->description;
         $product->quantity = $request->quantity;
