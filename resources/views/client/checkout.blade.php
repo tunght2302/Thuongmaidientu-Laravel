@@ -134,24 +134,16 @@
                                 <h3 class="form-title">PAYMENT METHOD</h3>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="" checked>
-                                        Payment on delivery
+                                        <button type="submit" class="btn btn-danger text-black">
+                                        Payment on delivery</button>
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="">
-                                        PAYPAL
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        I’VE READ AND ACCEPT THE TEMR & CONDITIONS
+                                       <a class="btn btn-success" href="{{ url('stripe',$total) }}">Payment by card</a>
                                     </label>
                                 </div>
                             </div>
-                                <button style="submit" class="button pull-right">PLACE ODER NOW</button>
                         </div>
                     </div>
                 </form>

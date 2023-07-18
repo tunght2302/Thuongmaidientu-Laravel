@@ -82,3 +82,9 @@ Route::post('/comment/{id}', [HomeController::class, 'comment']);
 // Login Google
 Route::get('auth/google', [HomeController::class,'googlepage']);
 Route::get('auth/google/callback', [HomeController::class,'googlecallback']);
+// Stripe
+Route::get('/cash_order', [HomeController::class,'cash_order']);
+
+Route::get('/stripe/{total}', [HomeController::class,'stripe']);
+
+Route::post('stripe/{total}',[HomeController::class,'stripePost'])->name('stripe.post');

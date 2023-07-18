@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from html.kutethemes.com/leka/html/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 May 2023 03:03:18 GMT -->
-
+    
 <head>
     @include('client.layout.css')
 </head>

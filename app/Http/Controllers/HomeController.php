@@ -14,6 +14,9 @@ use App\Models\Orders;
 use App\Models\Comments;
 
 use Exception;
+use Stripe\Stripe;
+use Stripe\Charge;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -154,7 +157,9 @@ class HomeController extends Controller
     public function cash_order(REQUEST $request)
     {
         $id = Auth::user()->id;
+
         $data_order = Carts::where('user_id', '=', $id)->get();
+
         foreach ($data_order as $orders) {
             $order = new Orders;
 
@@ -285,5 +290,59 @@ class HomeController extends Controller
         } catch (Exception $e) {
             dd($e->getMessage());
         }
+    }
+
+    public function stripe($total){
+
+        return view('client.stripe',compact('total'));
+    }
+
+    public function stripePost(Request $request,$total)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        Charge::create ([
+                "amount" => $total,
+                "currency" => "vnd",
+                "source" => $request->stripeToken,
+                "description" => "Thank for payment."
+        ]);
+        $data_user = Auth::user();
+        $id = Auth::user()->id;
+
+        $data_order = Carts::where('user_id', '=', $id)->get();
+
+
+        foreach ($data_order as $orders) {
+            $order = new Orders;
+
+            $order->name = $data_user->name;
+            $order->email = $data_user->email;
+            $order->phone = $data_user->phone;
+            $order->address = $data_user->address;
+            $order->user_id = $orders->user_id;
+
+            $order->product_title = $orders->product_title;
+            $order->quantity = $orders->quantity;
+            $order->price = $orders->price;
+            $order->image = $orders->image;
+            $order->product_id = $orders->product_id;
+
+            $total = 0;
+            $subtotal = $orders->quantity * $orders->price;
+            $total += $subtotal;
+            $order->total = $total;
+
+            $order->payment_status = 'Paid';
+            $order->delivery_status = 'Chờ xử lý';
+
+            $cart_id = $orders->id;
+            $delete_cart = Carts::find($cart_id);
+
+            $delete_cart->delete();
+            $order->save();
+        }
+
+        return redirect()->back()->with('success', 'Thanh toán thành công');
     }
 }
